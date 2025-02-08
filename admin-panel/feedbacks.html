@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
+</head>
+
+<body>
+  <div id="loader" class="loader-container">
+    <span class="loader"></span>
+  </div>
+  <nav class="nav-container top-navbar">
+    <span class="text-white fw-bold">ADMIN PANEL</span>
+    <ul class="nav-links">
+      <li>
+        <a href="notifications.html" class="text-white fs-18">
+          <i class="fa-solid fa-bell"></i>
+        </a>
+      </li>
+      <li>
+        <button href="notifications.html" class="logout-btn text-white fs-18">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </li>
+      <li>
+        <a href="profile.html">
+          <span class="profile-icon text-white">A</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="flex-content">
+    <div style="position: relative;">
+      <button onclick="openCloseSidebarMenu()" id="sidebar-open-close-btn" class="open-close-menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="left-side-menu open">
+        <ul class="left-side-menu-links">
+          <li>
+            <a href="index.html" class="left-menu-link ">
+              <i class="fa-solid fa-house"></i>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="blogs.html" class="left-menu-link ">
+              <i class="fa-solid fa-file"></i>
+              Blogs
+            </a>
+          </li>
+          <li>
+            <a href="testimonials.html" class="left-menu-link">
+              <i class="fa-solid fa-comment"></i>
+              Testimonials
+            </a>
+          </li>
+          <li>
+            <a href="portfolios.html" class="left-menu-link">
+              <i class="fa-solid fa-border-all"></i>
+              Portfolios
+            </a>
+          </li>
+          <li>
+            <a href="feedbacks.html" class="left-menu-link active">
+              <i class="fa-solid fa-user"></i>
+              Feedbacks
+            </a>
+          </li>
+          <li>
+            <a href="settings.html" class="left-menu-link">
+              <i class="fa-solid fa-gear"></i>
+              Settings
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <main class="container main-calculated">
+      <div class="pagination">
+        <a href="index.html" class="text-primary">
+          <i class="fa-solid fa-house fs-16"></i>
+        </a>
+        <span class="fs-18">/</span>
+        <span class="current-page fs-14">Feedbacks</span>
+
+      </div>
+
+      <div class="content-box fs-14 shadow">
+        <div class="content-header">
+          <h4 class="content-title fs-16">All Feedbacks</h4>
+          <div class="content-events">
+            <button onclick="notAllowAlert()" href="#" class="export">
+              <i class="fa-solid fa-file-arrow-down"></i>
+              Export
+            </button>
+          </div>
+        </div>
+        <div style="overflow-x: auto;">
+          <table class="content-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th class="action-row">
+                  <div class="w-70">Action</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="width: 150px;" class="line-1 w-500">
+                    Mert Seyit Yılmaz
+                  </div>
+                </td>
+                <td>
+                  <div style="width: 200px;" class="line-1 w-500">
+                    Lorem ipsum dolor sit
+                  </div>
+                </td>
+                <td>
+                  <div class=" line-2">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magni cupiditate sapiente mollitia
+                    omnis quibusdam temporibus explicabo modi consequatur ratione tempore corporis provident maxime
+                    recusandae optio id eius odit, est ea ipsa autem! Quae, aliquam! Esse delectus ullam possimus neque
+                    veniam a labore ex architecto minus, quasi similique suscipit voluptas qui nulla facilis rem?
+                    Voluptatem eius doloremque repellendus a labore exercitationem atque natus consequatur officiis
+                    ratione id, eum numquam non facilis at nesciunt beatae nam ad aut! Autem, maxime. Voluptatibus quas
+                    sequi saepe voluptatum autem ullam odit in animi sit deserunt, optio, asperiores consequuntur.
+                    Soluta accusamus nisi perferendis illum, numquam eveniet iusto alias sapiente dolorum voluptate
+                    rerum quo minus tenetur repellendus ea odit deleniti quidem? Ipsum delectus nihil fugit accusantium
+                    laboriosam sint exercitationem iusto. Distinctio ratione sunt esse tempora exercitationem, ea
+                    corrupti rerum? Facilis quod repellat ducimus, officia tempora necessitatibus mollitia inventore
+                    magnam consequuntur minima ut eaque voluptates tempore? Culpa aut aspernatur iste repellat. In
+                    aliquid pariatur, culpa nam maiores assumenda sequi modi saepe quo blanditiis exercitationem
+                    suscipit itaque? Qui mollitia necessitatibus magni modi voluptatum sapiente! Cumque quae expedita,
+                    harum atque corrupti nulla nostrum aspernatur? Fugit quod doloribus accusamus. Totam expedita
+                    tempore aliquid eligendi, dolorem inventore provident aperiam animi illo.
+                  </div>
+                </td>
+                <td>
+                  <div class="w-500 line-3">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magni cupiditate sapiente mollitia
+                    omnis quibusdam temporibus explicabo modi consequatur ratione tempore corporis provident maxime
+                    recusandae optio id eius odit, est ea ipsa autem! Quae, aliquam! Esse delectus ullam possimus neque
+                    veniam a labore ex architecto minus, quasi similique suscipit voluptas qui nulla facilis rem?
+                    Voluptatem eius doloremque repellendus a labore exercitationem atque natus consequatur officiis
+                    ratione id, eum numquam non facilis at nesciunt beatae nam ad aut! Autem, maxime. Voluptatibus quas
+                    sequi saepe voluptatum autem ullam odit in animi sit deserunt, optio, asperiores consequuntur.
+                    Soluta accusamus nisi perferendis illum, numquam eveniet iusto alias sapiente dolorum voluptate
+                    rerum quo minus tenetur repellendus ea odit deleniti quidem? Ipsum delectus nihil fugit accusantium
+                    laboriosam sint exercitationem iusto. Distinctio ratione sunt esse tempora exercitationem, ea
+                    corrupti rerum? Facilis quod repellat ducimus, officia tempora necessitatibus mollitia inventore
+                    magnam consequuntur minima ut eaque voluptates tempore? Culpa aut aspernatur iste repellat. In
+                    aliquid pariatur, culpa nam maiores assumenda sequi modi saepe quo blanditiis exercitationem
+                    suscipit itaque? Qui mollitia necessitatibus magni modi voluptatum sapiente! Cumque quae expedita,
+                    harum atque corrupti nulla nostrum aspernatur? Fugit quod doloribus accusamus. Totam expedita
+                    tempore aliquid eligendi, dolorem inventore provident aperiam animi illo.
+                  </div>
+                </td>
+                <td>
+                  <div style="width: 200px;" class="line-1 w-500">
+                    12 Ekim 2024 13:30:43
+                  </div>
+                </td>
+                <td class="action-row">
+                  <div class="w-70">
+                    <button onclick="deleteAlert(() => {console.log('Deleted !')})" class="delete">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                    <button class="show modal-open-btn" data-modal="modal1">
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <a href="feedback-replay.html" class="replay">
+                      <i class="fa-solid fa-share"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div>
+        <h4 class="feedback-subject fw-bold">Feedback Subject</h4>
+        <div class="divider"></div>
+        <div class="feedback-modal-person-info">
+          <div>
+            <i class="fa-solid fa-user"></i>
+            <span class="line-1">Mert Seyit Yılmaz lorem200</span>
+          </div>
+          <div>
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>12 Ekim 2024 13:30:43</span>
+          </div>
+          <div>
+            <i class="fa-solid fa-envelope"></i>
+            <span>seyit@gmail.com</span>
+          </div>
+        </div>
+        <p class="feedback-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias ipsam excepturi
+          animi sed
+          distinctio
+          eligendi! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis tempore natus cum, vero
+          adipisci enim deleniti possimus modi id accusamus animi ea soluta ad iste, qui ipsam voluptates reprehenderit
+          inventore? Consequuntur deleniti adipisci iusto! Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
+          sequi eum quam beatae eligendi laborum molestias suscipit at error ad! Perferendis quidem cupiditate impedit.
+          Atque, quis cumque? Iusto in tempora accusamus accusantium minima ex excepturi exercitationem voluptatibus eos
+          ipsam iure fuga libero ipsa praesentium necessitatibus, sunt soluta alias perferendis quasi labore saepe iste
+          cumque. Placeat praesentium inventore delectus accusamus neque, quasi fugiat mollitia itaque officia ex
+          quaerat, sapiente cum doloremque? Minus aliquid quae vitae cum earum doloremque suscipit facilis non quidem!
+          Numquam accusantium maxime voluptates. Expedita qui aperiam a dolor perspiciatis placeat nobis minus nam
+          repudiandae similique sed inventore, quis ducimus deserunt ratione obcaecati quae magnam illum adipisci
+          exercitationem illo ipsum? Dolorem ipsa unde quidem beatae, in est sapiente reiciendis similique earum cumque
+          nostrum. Tempore earum commodi, ad quod, enim, sunt aperiam sed assumenda deleniti consectetur et nemo est cum
+          sit fugit voluptatibus rerum consequatur consequuntur cupiditate? Necessitatibus provident doloribus porro
+          omnis, ratione veritatis similique delectus ullam, est, sequi unde natus maxime iure ad modi. Perspiciatis at
+          magnam ab nostrum facere autem corrupti. Incidunt accusantium corporis minima est magnam iure, error ex
+          blanditiis asperiores cumque, quas similique! Quibusdam doloribus ex sunt nam eius veniam dolore culpa, error,
+          eaque necessitatibus sed.</p>
+
+      </div>
+      <div class="divider"></div>
+      <div class="action-row">
+        <div>
+          <button onclick="deleteAlert(() => {console.log('Deleted !')})" class="delete">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+          <a href="feedback-replay.html" class="replay">
+            <i class="fa-solid fa-share"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/sweetalert.js"></script>
+  <script src="assets/js/customSweetAlert.js"></script>
+  <script src="assets/js/modal.js"></script>
+</body>
+
+</html>

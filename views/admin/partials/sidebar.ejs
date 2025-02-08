@@ -1,0 +1,45 @@
+<div style="position: relative;">
+  <button onclick="openCloseSidebarMenu()" id="sidebar-open-close-btn" class="open-close-menu">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+  <div class="left-side-menu open">
+    <ul class="left-side-menu-links">
+      <li>
+        <a href="/admin/home" class="left-menu-link <%= activePage === 'index' && 'active' %>">
+          <i class="fa-solid fa-house"></i>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="/admin/blogs" class="left-menu-link <%= activePage === 'blogs' && 'active' %>">
+          <i class="fa-solid fa-file"></i>
+          Blogs
+        </a>
+      </li>
+      <li>
+        <a href="/admin/testimonials" class="left-menu-link <%= activePage === 'testimonials' && 'active' %>">
+          <i class="fa-solid fa-comment"></i>
+          Testimonials
+        </a>
+      </li>
+      <li>
+        <a href="/admin/portfolios" class="left-menu-link <%= activePage === 'portfolios' && 'active' %>">
+          <i class="fa-solid fa-border-all"></i>
+          Portfolios
+        </a>
+      </li>
+      <li>
+        <a href="/admin/feedbacks" class="left-menu-link <%= activePage === 'feedbacks' && 'active' %>">
+          <i class="fa-solid fa-user"></i>
+          Feedbacks
+        </a>
+      </li>
+      <li>
+        <a href="/admin/settings" class="left-menu-link <%= activePage === 'settings' && 'active' %>">
+          <i class="fa-solid fa-gear"></i>
+          Settings
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="assets/css/quill.snow.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
+</head>
+
+<body>
+  <div id="loader" class="loader-container">
+    <span class="loader"></span>
+  </div>
+  <nav class="nav-container top-navbar">
+    <span class="text-white fw-bold">ADMIN PANEL</span>
+    <ul class="nav-links">
+      <li>
+        <a href="notifications.html" class="text-white fs-18">
+          <i class="fa-solid fa-bell"></i>
+        </a>
+      </li>
+      <li>
+        <button href="notifications.html" class="logout-btn text-white fs-18">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </li>
+      <li>
+        <a href="profile.html">
+          <span class="profile-icon text-white">A</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="flex-content">
+    <div style="position: relative;">
+      <button onclick="openCloseSidebarMenu()" id="sidebar-open-close-btn" class="open-close-menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="left-side-menu open">
+        <ul class="left-side-menu-links">
+          <li>
+            <a href="index.html" class="left-menu-link ">
+              <i class="fa-solid fa-house"></i>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="blogs.html" class="left-menu-link active">
+              <i class="fa-solid fa-file"></i>
+              Blogs
+            </a>
+          </li>
+          <li>
+            <a href="testimonials.html" class="left-menu-link">
+              <i class="fa-solid fa-comment"></i>
+              Testimonials
+            </a>
+          </li>
+          <li>
+            <a href="portfolios.html" class="left-menu-link">
+              <i class="fa-solid fa-border-all"></i>
+              Portfolios
+            </a>
+          </li>
+          <li>
+            <a href="feedbacks.html" class="left-menu-link">
+              <i class="fa-solid fa-user"></i>
+              Feedbacks
+            </a>
+          </li>
+          <li>
+            <a href="settings.html" class="left-menu-link">
+              <i class="fa-solid fa-gear"></i>
+              Settings
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <main class="container main-calculated">
+      <div class="pagination">
+        <a href="index.html" class="text-primary">
+          <i class="fa-solid fa-house fs-16"></i>
+        </a>
+        <span class="fs-18">/</span>
+        <a href="blogs.html" class="text-primary fs-14">
+          Blogs
+        </a>
+        <span class="fs-18">/</span>
+        <span class="current-page fw-bold fs-14">Edit Blog</span>
+
+      </div>
+
+      <div class="content-box fs-14 shadow">
+        <div class="content-header">
+          <h4 class="content-title fs-16">Edit Blog</h4>
+        </div>
+        <div>
+          <form action="/blog/share-blog" method="post">
+            <div class="form-input">
+              <label for="blog_title" class="text-primary">Blog Title</label>
+              <input value="Blog Title" type="text" name="blog_title" id="blog_title">
+            </div>
+            <div class="form-input thumnail-image">
+              <label for="blog_image" class="text-primary">Blog Image</label>
+              <input type="file" name="blog_image" id="blog_image" accept="image/png, image/gif, image/jpeg">
+            </div>
+            <div class="form-input">
+              <label for="blog_text" class="text-primary">Blog Text</label>
+              <div id="editor">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, corporis nostrum? Pariatur enim
+                  repellat qui officiis vitae.</p>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <button onclick="questionAndActionAlert(() => {console.log('Saved !')})" type="button"
+              class="submit-btn fs-14">
+              <i class="fa-solid fa-floppy-disk"></i>
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/quill.js"></script>
+  <script src="assets/js/sweetalert.js"></script>
+  <script src="assets/js/customSweetAlert.js"></script>
+  <script>
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: 'Start writing blog here...',
+
+    });
+  </script>
+</body>
+
+</html>

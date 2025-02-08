@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
+</head>
+
+<body>
+  <main class="login-page">
+    <div class="login-card shadow">
+      <form action="/signup">
+        <div class="success-message">
+          <i class="fa-solid fa-circle-check"></i>
+          <span class="fs-16 text-center">We have sent your password to your email address.</span>
+        </div>
+        <div class="divider"></div>
+        <div class="login-informations">
+          <a href="signin.html" class="auth-redirect">Go to Signin</a>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="assets/js/main.js"></script>
+  <script>
+    const showHideBtn = document.getElementById('password-show-hide-btn')
+    const passwordInput = document.getElementById('password')
+    showHideBtn.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text'
+        showHideBtn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>'
+      } else {
+        passwordInput.type = 'password'
+        showHideBtn.innerHTML = '<i class="fa-solid fa-eye"></i>'
+      }
+    })
+  </script>
+</body>
+
+</html>

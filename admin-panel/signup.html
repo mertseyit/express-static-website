@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
+</head>
+
+<body>
+  <main class="login-page">
+    <div class="login-card shadow">
+      <form action="/signup">
+        <h4 class="text-center fs-20 fw-bold">Signup</h4>
+        <div class="divider"></div>
+        <div class="form-input">
+          <label for="admin_firstname" class="text-primary fs-14">Firstname</label>
+          <input type="text" name="admin_firstname" id="admin_firstname">
+        </div>
+        <div class="form-input">
+          <label for="admin_lastname" class="text-primary fs-14">Lastname</label>
+          <input type="text" name="admin_lastname" id="admin_lastname">
+        </div>
+        <div class="form-input">
+          <label for="admin_email" class="text-primary fs-14">Email</label>
+          <input type="email" name="admin_email" id="admin_email">
+        </div>
+        <div class="form-input">
+          <label for="password" class="text-primary fs-14">Password</label>
+          <div class="password-input-show-hide-btn">
+            <input type="password" name="password" id="password">
+            <button id="password-show-hide-btn" type="button">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="login-informations">
+          <button class="signin-button">Singup</button>
+          <span class="fs-12">or</span>
+          <a href="signin.html" class="auth-redirect">Signin</a>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="assets/js/main.js"></script>
+  <script>
+    const showHideBtn = document.getElementById('password-show-hide-btn')
+    const passwordInput = document.getElementById('password')
+    showHideBtn.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text'
+        showHideBtn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>'
+      } else {
+        passwordInput.type = 'password'
+        showHideBtn.innerHTML = '<i class="fa-solid fa-eye"></i>'
+      }
+    })
+  </script>
+</body>
+
+</html>

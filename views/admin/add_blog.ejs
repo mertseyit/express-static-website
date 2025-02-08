@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="../../css/admin.quill.snow.css">
+  <link rel="stylesheet" href="../../css/admin.main.css">
+  <link rel="stylesheet" href="../../css/admin.fontawesome.all.min.css">
+</head>
+
+<body>
+  <%- include('partials/navbar') %>
+
+    <div class="flex-content">
+      <%- include('partials/sidebar') %>
+
+        <main class="container main-calculated">
+          <div class="pagination">
+            <a href="/" class="text-primary">
+              <i class="fa-solid fa-house fs-16"></i>
+            </a>
+            <span class="fs-18">/</span>
+            <a href="/admin/blogs" class="text-primary fs-14">
+              Blogs
+            </a>
+            <span class="fs-18">/</span>
+            <span class="current-page fw-bold fs-14">Add Blog</span>
+
+          </div>
+
+          <div class="content-box fs-14 shadow">
+            <div class="content-header">
+              <h4 class="content-title fs-16">Add Blog</h4>
+            </div>
+            <div>
+              <form id="add_blog_form">
+                <div class="form-input">
+                  <label for="blog_title" class="text-primary">Blog Title</label>
+                  <input type="text" name="blog_title" id="blog_title">
+                </div>
+                <div class="form-input thumnail-image">
+                  <label for="blog_image" class="text-primary">Blog Image</label>
+                  <input type="file" name="blog_image" id="preview_img" accept="image/png, image/gif, image/jpeg">
+                </div>
+                <div class="form-input">
+                  <label for="blog_text" class="text-primary">Blog Text</label>
+                  <div id="editor">
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <button onclick="questionAndActionAlert(() => {addBlog()})" type="button" class="submit-btn fs-14">
+                  <i class="fa-solid fa-check"></i>
+                  Share
+                </button>
+              </form>
+            </div>
+          </div>
+        </main>
+    </div>
+    <script src="../../js/admin.main.js"></script>
+    <script src="../../js/admin.quill.js"></script>
+    <script src="../../js/admin.requests.js"></script>
+    <script src="../../js/admin.sweetalert.js"></script>
+    <script src="../../js/admin.customSweetAlert.js"></script>
+    <script>
+      const quill = new Quill('#editor', {
+        theme: 'snow',
+        placeholder: 'Start writing testimonial here or paste',
+
+      });
+    </script>
+</body>
+
+</html>
