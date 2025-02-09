@@ -16,8 +16,8 @@
         <h4 class="text-center fs-20 fw-bold">Signin</h4>
         <div class="divider"></div>
         <div class="form-input">
-          <label for="admin_email" class="text-primary fs-14">Email</label>
-          <input type="email" name="admin_email" id="admin_email">
+          <label for="email" class="text-primary fs-14">Email</label>
+          <input type="email" name="email" id="email">
         </div>
         <div class="form-input">
           <label for="password" class="text-primary fs-14">Password</label>
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="login-informations">
-          <button class="signin-button">Singin</button>
+          <button type="button" onclick="signIn()" class="signin-button">Singin</button>
           <span class="fs-12">Forgot your login information?</span>
           <a href="/admin/reset" class="auth-redirect">Reset your data</a>
           <span class="fs-12">or</span>
@@ -39,6 +39,9 @@
     </div>
   </main>
   <script src="js/admin.main.js"></script>
+  <script src="js/admin.requests.js"></script>
+  <script src="js/admin.sweetalert.js"></script>
+  <script src="js/admin.customSweetAlert.js"></script>
   <script>
     const showHideBtn = document.getElementById('password-show-hide-btn')
     const passwordInput = document.getElementById('password')

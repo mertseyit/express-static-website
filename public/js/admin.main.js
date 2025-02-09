@@ -5,14 +5,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   }, 100);
 
   const data = await whoAmI();
-  if (data.status !== 200) {
-    Swal.fire({
-      title: `${data.message}`,
-      icon: 'error',
-    }).then(() => {
-      window.location.replace('/admin/signin');
-    });
-  }
+  //TODO!: bu kısım giriş ve kayıt sayfalarında çalışmamalı.
+  // if (data.status !== 200) {
+  //   Swal.fire({
+  //     title: `${data.message}`,
+  //     icon: 'error',
+  //   }).then(() => {
+  //     window.location.replace('/admin/signin');
+  //   });
+  // }
 });
 
 const openCloseSidebarMenu = () => {

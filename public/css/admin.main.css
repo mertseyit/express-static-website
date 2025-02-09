@@ -183,6 +183,10 @@ select {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
+.p-4 {
+  padding: 20px;
+}
+
 .line-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;

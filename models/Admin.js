@@ -47,16 +47,17 @@ const Admin = sequelize.define(
         notNull: { msg: 'Password is required' },
       },
     },
-    createdAt: {
+    createdat: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
-    updatedAt: {
+    updatedat: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
   },
   {
+    timestamps: false,
     freezeTableName: true,
     modelName: 'Admin',
     tableName: 'admins',

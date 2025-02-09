@@ -16,16 +16,16 @@
         <h4 class="text-center fs-20 fw-bold">Signup</h4>
         <div class="divider"></div>
         <div class="form-input">
-          <label for="admin_firstname" class="text-primary fs-14">Firstname</label>
-          <input type="text" name="admin_firstname" id="admin_firstname">
+          <label for="firstname" class="text-primary fs-14">Firstname</label>
+          <input type="text" name="firstname" id="firstname">
         </div>
         <div class="form-input">
-          <label for="admin_lastname" class="text-primary fs-14">Lastname</label>
-          <input type="text" name="admin_lastname" id="admin_lastname">
+          <label for="lastname" class="text-primary fs-14">Lastname</label>
+          <input type="text" name="lastname" id="lastname">
         </div>
         <div class="form-input">
-          <label for="admin_email" class="text-primary fs-14">Email</label>
-          <input type="email" name="admin_email" id="admin_email">
+          <label for="email" class="text-primary fs-14">Email</label>
+          <input type="email" name="email" id="email">
         </div>
         <div class="form-input">
           <label for="password" class="text-primary fs-14">Password</label>
@@ -36,8 +36,14 @@
             </button>
           </div>
         </div>
+        <div class="form-input">
+          <label for="confirm-password" class="text-primary fs-14">Confirm Password</label>
+          <div class="password-input-show-hide-btn">
+            <input type="password" name="confirm-password" id="confirm-password">
+          </div>
+        </div>
         <div class="login-informations">
-          <button class="signin-button">Singup</button>
+          <button type="button" onclick="signUp()" class="signin-button">Singup</button>
           <span class="fs-12">or</span>
           <a href="/admin/signin" class="auth-redirect">Signin</a>
         </div>
@@ -45,6 +51,9 @@
     </div>
   </main>
   <script src="js/admin.main.js"></script>
+  <script src="js/admin.requests.js"></script>
+  <script src="js/admin.sweetalert.js"></script>
+  <script src="js/admin.customSweetAlert.js"></script>
   <script>
     const showHideBtn = document.getElementById('password-show-hide-btn')
     const passwordInput = document.getElementById('password')

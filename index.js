@@ -25,8 +25,8 @@ const adminSettingsRoute = require('./routes/admin/settings.route');
 const adminSigninRoute = require('./routes/admin/signin.route');
 const adminSignupRoute = require('./routes/admin/signup.route');
 const adminWhoAmIRoute = require('./routes/admin/whoami.route');
+const adminVerifyEmailRoute = require('./routes/admin/verify-email.route');
 const sequelize = require('./database/db');
-const generateJWToken = require('./helpers/generateJWToken');
 const app = express();
 
 app.use(cors());
@@ -66,6 +66,7 @@ app.use('/admin/feedbacks', adminFeedbacksRoute);
 app.use('/admin/settings', adminSettingsRoute);
 app.use('/admin/signin', adminSigninRoute);
 app.use('/admin/signup', adminSignupRoute);
+app.use('/admin/auth', adminVerifyEmailRoute);
 app.use('/admin/auth', userAuthMiddleware, adminWhoAmIRoute);
 
 app.use('/*', (req, res, next) => {
@@ -75,8 +76,6 @@ app.use('/*', (req, res, next) => {
     keywords: 'Page not Found',
   });
 });
-
-console.log(generateJWToken({ id: 1 }));
 
 //basic global error handler
 app.use((err, req, res, next) => {

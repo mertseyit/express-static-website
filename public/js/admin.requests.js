@@ -19,7 +19,6 @@ const addBlog = async () => {
   formData.append('preview_img', blogImage.files[0]);
   const blogText = document.getElementById('editor');
   formData.append('blog_text', `${blogText.innerHTML}`);
-  console.log(formData);
   const response = await fetch('/admin/blogs/add', {
     method: 'post',
     headers: {
@@ -29,6 +28,62 @@ const addBlog = async () => {
   });
   const data = await response.json();
   if (data.status !== 201) {
+    Swal.fire({
+      title: `${data.message}`,
+      icon: 'error',
+    });
+  } else {
+    Swal.fire({
+      title: `${data.message}`,
+      icon: 'success',
+    });
+    form.reset();
+  }
+};
+
+const signUp = async () => {
+  const formData = new FormData();
+  const firstname = document.getElementById('firstname');
+  formData.append('firstname', firstname.value);
+  const lastname = document.getElementById('lastname');
+  formData.append('lastname', lastname.value);
+  const email = document.getElementById('email');
+  formData.append('email', email.value);
+  const password = document.getElementById('password');
+  formData.append('password', password.value);
+  const confirmPassword = document.getElementById('confirm-password');
+  formData.append('confirmPassword', confirmPassword.value);
+  const response = await fetch('/admin/signup', {
+    method: 'post',
+    body: formData,
+  });
+  const data = await response.json();
+  if (data.status !== 200) {
+    Swal.fire({
+      title: `${data.message}`,
+      icon: 'error',
+    });
+  } else {
+    Swal.fire({
+      title: `${data.message}`,
+      icon: 'success',
+    });
+    form.reset();
+  }
+};
+
+const signIn = async () => {
+  const formData = new FormData();
+  const email = document.getElementById('email');
+  formData.append('email', email.value);
+  const password = document.getElementById('password');
+  formData.append('password', password.value);
+  const response = await fetch('/admin/signin', {
+    method: 'post',
+    body: formData,
+  });
+  const data = await response.json();
+  if (data.status !== 200) {
     Swal.fire({
       title: `${data.message}`,
       icon: 'error',
