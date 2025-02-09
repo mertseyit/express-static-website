@@ -3,13 +3,14 @@ const { status } = require('http-status');
 const uploadStorage = require('../../multer/storage');
 const Blog = require('../../models/Blog');
 const generateFilePath = require('../../helpers/generateFilePath');
+const createCustomErrorMsg = require('../../helpers/createCustomErrorMsg');
 
 router.get('/', (req, res, next) => {
   try {
     res.status(status.OK).render('admin/blogs', { activePage: 'blogs' });
   } catch (error) {
     res.status(status.BAD_REQUEST).json({
-      message: error.message,
+      message: `${createCustomErrorMsg(error)}`,
       status: status.BAD_REQUEST,
     });
   }
@@ -20,7 +21,7 @@ router.get('/add', (req, res, next) => {
     res.status(status.OK).render('admin/add_blog', { activePage: 'blogs' });
   } catch (error) {
     res.status(status.BAD_REQUEST).json({
-      message: error.message,
+      message: `${createCustomErrorMsg(error)}`,
       status: status.BAD_REQUEST,
     });
   }
@@ -52,7 +53,7 @@ router.post(
       }
     } catch (error) {
       res.status(status.BAD_REQUEST).json({
-        message: error.message,
+        message: `${createCustomErrorMsg(error)}`,
         status: status.BAD_REQUEST,
       });
     }

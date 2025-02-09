@@ -5,10 +5,7 @@ const userAuthMiddleWare = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
     if (!token) {
-      return res.status(status.UNAUTHORIZED).json({
-        message: 'Unauthorized',
-        status: status.UNAUTHORIZED,
-      });
+      return res.status(status.UNAUTHORIZED).render('admin/'); // !TOOD:Burada kaldın
     } else {
       jwt.verify(
         token.split(' ')[1],

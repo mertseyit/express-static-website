@@ -5,6 +5,7 @@ CREATE TABLE admins (
   email VARCHAR(255) UNIQUE NOT NULL,
 	email_verified boolean not null,
   password TEXT NOT NULL,
+	token text,
 	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

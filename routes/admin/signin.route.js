@@ -4,11 +4,15 @@ const bcrypt = require('bcrypt');
 const Admin = require('../../models/Admin');
 const generateJWToken = require('../../helpers/generateJWToken');
 const uploadStorage = require('../../multer/storage');
+const createCustomErrorMsg = require('../../helpers/createCustomErrorMsg');
 router.get('/', (req, res, next) => {
   try {
     res.status(status.OK).render('admin/signin');
   } catch (error) {
-    next(error);
+    res.status(status.BAD_REQUEST).json({
+      message: `${createCustomErrorMsg(error)}`,
+      status: status.BAD_REQUEST,
+    });
   }
 });
 
@@ -48,9 +52,9 @@ router.post('/', uploadStorage.none(), async (req, res, next) => {
       status: status.OK,
     });
   } catch (error) {
-    res.status(status.INTERNAL_SERVER_ERROR).json({
-      message: `${error.message}`,
-      status: status.INTERNAL_SERVER_ERROR,
+    res.status(status.BAD_REQUEST).json({
+      message: `${createCustomErrorMsg(error)}`,
+      status: status.BAD_REQUEST,
     });
   }
 });

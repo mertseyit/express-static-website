@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { status } = require('http-status');
 const UserFeedback = require('../models/UserFeedback');
+const createCustomErrorMsg = require('../helpers/createCustomErrorMsg');
 router.get('/contact', (req, res, next) => {
   //global error handling test
   if (req.query.id == '1') {
@@ -14,7 +15,10 @@ router.get('/contact', (req, res, next) => {
       pageHeader: 'Contact',
     });
   } catch (error) {
-    next(error);
+    res.status(status.BAD_REQUEST).json({
+      message: `${createCustomErrorMsg(error)}`,
+      status: status.BAD_REQUEST,
+    });
   }
 });
 

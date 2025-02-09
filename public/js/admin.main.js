@@ -1,20 +1,21 @@
-document.addEventListener('DOMContentLoaded', async () => {
-  const loader = document.getElementById('loader');
-  setTimeout(() => {
-    loader.classList.add('loaded');
-  }, 100);
+const checkAuth = async () => {
+  document.addEventListener('DOMContentLoaded', async () => {
+    const loader = document.getElementById('loader');
+    setTimeout(() => {
+      loader.classList.add('loaded');
+    }, 100);
 
-  const data = await whoAmI();
-  //TODO!: bu kısım giriş ve kayıt sayfalarında çalışmamalı.
-  // if (data.status !== 200) {
-  //   Swal.fire({
-  //     title: `${data.message}`,
-  //     icon: 'error',
-  //   }).then(() => {
-  //     window.location.replace('/admin/signin');
-  //   });
-  // }
-});
+    const data = await whoAmI();
+    if (data.status !== 200) {
+      Swal.fire({
+        title: `${data.message}`,
+        icon: 'error',
+      }).then(() => {
+        window.location.replace('admin/signin');
+      });
+    }
+  });
+};
 
 const openCloseSidebarMenu = () => {
   const sideMenu = document.querySelector('.left-side-menu');

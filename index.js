@@ -58,12 +58,12 @@ app.use(portfolioRouter);
 app.use(teamRouter);
 app.use(contactRouter);
 //admin routes
-app.use('/admin/home', adminIndexRouter);
-app.use('/admin/blogs', adminBlogsRouter);
-app.use('/admin/testimonials', adminTestimonialsRoute);
-app.use('/admin/portfolios', adminPortfoliosRoute);
-app.use('/admin/feedbacks', adminFeedbacksRoute);
-app.use('/admin/settings', adminSettingsRoute);
+app.use('/admin/home', userAuthMiddleware, adminIndexRouter);
+app.use('/admin/blogs', userAuthMiddleware, adminBlogsRouter);
+app.use('/admin/testimonials', userAuthMiddleware, adminTestimonialsRoute);
+app.use('/admin/portfolios', userAuthMiddleware, adminPortfoliosRoute);
+app.use('/admin/feedbacks', userAuthMiddleware, adminFeedbacksRoute);
+app.use('/admin/settings', userAuthMiddleware, adminSettingsRoute);
 app.use('/admin/signin', adminSigninRoute);
 app.use('/admin/signup', adminSignupRoute);
 app.use('/admin/auth', adminVerifyEmailRoute);

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { status } = require('http-status');
+const createCustomErrorMsg = require('../helpers/createCustomErrorMsg');
 router.get('/services', (req, res, next) => {
   try {
     res.status(status.OK).render('services', {
@@ -9,7 +10,10 @@ router.get('/services', (req, res, next) => {
       pageHeader: 'Services',
     });
   } catch (error) {
-    next(error);
+    res.status(status.BAD_REQUEST).json({
+      message: `${createCustomErrorMsg(error)}`,
+      status: status.BAD_REQUEST,
+    });
   }
 });
 

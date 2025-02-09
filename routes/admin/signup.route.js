@@ -5,12 +5,16 @@ const Admin = require('../../models/Admin');
 const { sendAccountVerifyEmail } = require('../../helpers/transportMail');
 const crypto = require('crypto');
 const Token = require('../../models/Token');
+const createCustomErrorMsg = require('../../helpers/createCustomErrorMsg');
 
 router.get('/', (req, res, next) => {
   try {
     res.status(status.OK).render('admin/signup');
   } catch (error) {
-    next(error);
+    res.status(status.BAD_REQUEST).json({
+      message: `${createCustomErrorMsg(error)}`,
+      status: status.BAD_REQUEST,
+    });
   }
 });
 
@@ -31,7 +35,8 @@ router.post('/', uploadStorage.none(), async (req, res, next) => {
       });
     }
 
-    await Admin.create({
+    var token = crypto.randomBytes(128).toString('hex');
+    const user = await Admin.create({
       firstname: firstname,
       lastname: lastname,
       email: email,
@@ -39,16 +44,21 @@ router.post('/', uploadStorage.none(), async (req, res, next) => {
       email_verified: false,
     });
 
-    var token = crypto.randomBytes(128).toString('hex');
-
     await Token.create({
       token: token,
+      admin_id: user.dataValues.id,
     });
+
     const success = await sendAccountVerifyEmail(
-      `http://${process.env.API_HOST}:${process.env.API_PORT}/admin/auth/verified-email?token=${token}`
+      `${email}`,
+      `http://${process.env.API_HOST}:${process.env.API_PORT}/admin/auth/verified-email?token=${token}&id=${user.dataValues.id}`
     );
+
     if (success) {
-      res.status(status.OK).redirect('admin/verify-email');
+      res.status(status.OK).json({
+        message: 'We send email verification link to your email.',
+        status: status.OK,
+      });
     } else {
       res.status(status.BAD_REQUEST).json({
         message: 'Account failed to create',
@@ -57,7 +67,7 @@ router.post('/', uploadStorage.none(), async (req, res, next) => {
     }
   } catch (error) {
     res.status(status.INTERNAL_SERVER_ERROR).json({
-      message: `${error.message}`,
+      message: `${createCustomErrorMsg(error)}`,
       status: status.INTERNAL_SERVER_ERROR,
     });
   }

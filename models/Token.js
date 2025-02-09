@@ -19,6 +19,15 @@ const Token = sequelize.define(
         },
       },
     },
+    admin_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Id require',
+        },
+      },
+    },
   },
   {
     timestamps: false,

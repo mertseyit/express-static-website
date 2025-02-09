@@ -92,7 +92,10 @@ const signIn = async () => {
     Swal.fire({
       title: `${data.message}`,
       icon: 'success',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = 'home';
+      }
     });
-    form.reset();
   }
 };
