@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
-  <link rel="stylesheet" href="css/admin.main.css">
-  <link rel="stylesheet" href="css/admin.fontawesome.all.min.css">
+  <link rel="stylesheet" href="../../css/admin.quill.snow.css">
+  <link rel="stylesheet" href="../../../css/admin.main.css">
+  <link rel="stylesheet" href="../../../css/admin.fontawesome.all.min.css">
 </head>
 
 <body>
@@ -36,22 +37,25 @@
             <div>
               <form action="/blog/share-blog" method="post">
                 <div class="form-input">
-                  <label for="blog_title" class="text-primary">Blog Title</label>
+                  <label for="blog_title" class="text-primary">
+                    <%= blog.blog_title %>
+                  </label>
                   <input value="Blog Title" type="text" name="blog_title" id="blog_title">
                 </div>
                 <div class="form-input thumnail-image">
                   <label for="blog_image" class="text-primary">Blog Image</label>
                   <input type="file" name="blog_image" id="blog_image" accept="image/png, image/gif, image/jpeg">
+                  <img style="width: 100px; height: 100px; object-fit: cover;" src="<%= blog.preview_img %>"
+                    alt="Blog Image">
                 </div>
                 <div class="form-input">
                   <label for="blog_text" class="text-primary">Blog Text</label>
                   <div id="editor">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, corporis nostrum? Pariatur enim
-                      repellat qui officiis vitae.</p>
+                    <%- blog.blog_text %>
                   </div>
                 </div>
                 <div class="divider"></div>
-                <button onclick="questionAndActionAlert(() => {console.log('Saved !')})" type="button"
+                <button onclick="questionAndActionAlert(() => { updateBlog(<%= blog.blog_id %>) })" type="button"
                   class="submit-btn fs-14">
                   <i class="fa-solid fa-floppy-disk"></i>
                   Save
@@ -61,9 +65,18 @@
           </div>
         </main>
     </div>
-    <script src="js/admin.main.js"></script>
-    <script src="js/admin.sweetalert.js"></script>
-    <script src="js/admin.customSweetAlert.js"></script>
+    <script src="../../js/admin.main.js"></script>
+    <script src="../../js/admin.quill.js"></script>
+    <script src="../../js/admin.requests.js"></script>
+    <script src="../../js/admin.sweetalert.js"></script>
+    <script src="../../js/admin.customSweetAlert.js"></script>
+    <script>
+      const quill = new Quill('#editor', {
+        theme: 'snow',
+        placeholder: 'Start writing testimonial here or paste',
+
+      });
+    </script>
 </body>
 
 </html>

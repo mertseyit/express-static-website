@@ -79,8 +79,8 @@ app.use('/*', (req, res, next) => {
 
 //basic global error handler
 app.use((err, req, res, next) => {
-  req.flash('internal_server_error', `${err.message}`);
-  res.redirect('/');
+  console.log(err);
+  res.status(500).render('error', { msg: 'Internal Server Error' });
 });
 
 (async () => {

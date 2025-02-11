@@ -45,61 +45,36 @@
                   <tr>
                     <th>Image</th>
                     <th>Title</th>
-                    <th>Content</th>
                     <th class="action-row">
                       <div class="w-70">Action</div>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <div>
-                        <img src="img/300x300.png" class="w-50" alt="Blog Image">
-                      </div>
-                    </td>
-                    <td>
-                      <div style="width: 100%;" class="line-1 w-200">Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Numquam odit
-                        autem possimus esse,
-                        adipisci consectetur quod?</div>
-                    </td>
-                    <td>
-                      <div class="w-500 line-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magni cupiditate sapiente
-                        mollitia
-                        omnis quibusdam temporibus explicabo modi consequatur ratione tempore corporis provident maxime
-                        recusandae optio id eius odit, est ea ipsa autem! Quae, aliquam! Esse delectus ullam possimus
-                        neque
-                        veniam a labore ex architecto minus, quasi similique suscipit voluptas qui nulla facilis rem?
-                        Voluptatem eius doloremque repellendus a labore exercitationem atque natus consequatur officiis
-                        ratione id, eum numquam non facilis at nesciunt beatae nam ad aut! Autem, maxime. Voluptatibus
-                        quas
-                        sequi saepe voluptatum autem ullam odit in animi sit deserunt, optio, asperiores consequuntur.
-                        Soluta accusamus nisi perferendis illum, numquam eveniet iusto alias sapiente dolorum voluptate
-                        rerum quo minus tenetur repellendus ea odit deleniti quidem? Ipsum delectus nihil fugit
-                        accusantium
-                        laboriosam sint exercitationem iusto. Distinctio ratione sunt esse tempora exercitationem, ea
-                        corrupti rerum? Facilis quod repellat ducimus, officia tempora necessitatibus mollitia inventore
-                        magnam consequuntur minima ut eaque voluptates tempore? Culpa aut aspernatur iste repellat. In
-                        aliquid pariatur, culpa nam maiores assumenda sequi modi saepe quo blanditiis exercitationem
-                        suscipit itaque? Qui mollitia necessitatibus magni modi voluptatum sapiente! Cumque quae
-                        expedita,
-                        harum atque corrupti nulla nostrum aspernatur? Fugit quod doloribus accusamus. Totam expedita
-                        tempore aliquid eligendi, dolorem inventore provident aperiam animi illo.
-                      </div>
-                    </td>
-                    <td class="action-row">
-                      <div class="w-70">
-                        <a href="admin/blogs/edit/1" class="edit">
-                          <i class="fa-solid fa-file-pen"></i>
-                        </a>
-                        <button onclick="deleteAlert(() => {console.log('Deleted !')})" class="delete">
-                          <i class="fa-solid fa-trash"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                  <% blogs.forEach((blog,index)=> {%>
+                    <tr>
+                      <td>
+                        <div>
+                          <img src="<%= blog.preview_img %>" class="w-50" alt="Blog Image">
+                        </div>
+                      </td>
+                      <td>
+                        <div style="width: 100%;" class="line-1">
+                          <%=blog.blog_title%>
+                        </div>
+                      </td>
+                      <td class="action-row">
+                        <div class="w-70">
+                          <a href="/admin/blogs/update/<%=blog.id%>" class="edit">
+                            <i class="fa-solid fa-file-pen"></i>
+                          </a>
+                          <button onclick="deleteAlert(() => {console.log('Deleted !')})" class="delete">
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <% });%>
                 </tbody>
               </table>
             </div>
@@ -109,6 +84,7 @@
     <script src="js/admin.main.js"></script>
     <script src="js/admin.sweetalert.js"></script>
     <script src="js/admin.customSweetAlert.js"></script>
+
 </body>
 
 </html>

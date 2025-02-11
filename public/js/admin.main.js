@@ -1,21 +1,15 @@
-const checkAuth = async () => {
-  document.addEventListener('DOMContentLoaded', async () => {
-    const loader = document.getElementById('loader');
-    setTimeout(() => {
-      loader.classList.add('loaded');
-    }, 100);
+document.addEventListener('DOMContentLoaded', async () => {
+  const loader = document.getElementById('loader');
+  setTimeout(() => {
+    loader.classList.add('loaded');
+  }, 100);
+});
 
-    const data = await whoAmI();
-    if (data.status !== 200) {
-      Swal.fire({
-        title: `${data.message}`,
-        icon: 'error',
-      }).then(() => {
-        window.location.replace('admin/signin');
-      });
-    }
-  });
-};
+window.addEventListener('pageshow', function (event) {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
 
 const openCloseSidebarMenu = () => {
   const sideMenu = document.querySelector('.left-side-menu');

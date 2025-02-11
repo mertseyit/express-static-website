@@ -3,8 +3,12 @@ const { status } = require('http-status');
 const createCustomErrorMsg = require('../../helpers/createCustomErrorMsg');
 router.get('/whoami', (req, res, next) => {
   try {
-    const user = req.user;
-    console.log(user);
+    const { id } = req.user;
+    res.status(status.OK).json({
+      msg: null,
+      status: status.OK,
+      data: id,
+    });
   } catch (error) {
     res.status(status.BAD_REQUEST).json({
       message: `${createCustomErrorMsg(error)}`,

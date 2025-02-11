@@ -3,30 +3,31 @@ const jwt = require('jsonwebtoken');
 
 const userAuthMiddleWare = async (req, res, next) => {
   try {
-    const token = req.headers.authorization;
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    const token = req.cookies.token;
     if (!token) {
-      return res.status(status.UNAUTHORIZED).render('admin/'); // !TOOD:Burada kaldın
+      return res.status(status.UNAUTHORIZED).render('admin/unauthorized', {
+        msg: 'Invalid Authorizatin Try',
+        login_redirect: '/admin/signin',
+      });
     } else {
-      jwt.verify(
-        token.split(' ')[1],
-        process.env.JWT_SECRET_KEY,
-        (err, decoded) => {
-          if (err) {
-            return res.status(status.UNAUTHORIZED).json({
-              message: 'Session Expired',
-              status: status.UNAUTHORIZED,
-            });
-          }
-          req.user = decoded;
-          next();
+      jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
+        if (err) {
+          return res.status(status.UNAUTHORIZED).render('admin/unauthorized', {
+            msg: 'Session Expired. Please login',
+            login_redirect: '/admin/signin',
+          });
         }
-      );
+        req.user = decoded;
+        next();
+      });
     }
   } catch (error) {
     res.status(status.BAD_REQUEST).json({
       message: 'Something went wrong. Please try again later.',
       status: status.BAD_REQUEST,
     });
+    console.log(error);
   }
 };
 
