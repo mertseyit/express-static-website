@@ -26,13 +26,13 @@
               Testimonials
             </a>
             <span class="fs-18">/</span>
-            <span class="current-page fw-bold fs-14">Add Testimonial</span>
+            <span class="current-page fw-bold fs-14">Edit Testimonial</span>
 
           </div>
 
           <div class="content-box fs-14 shadow">
             <div class="content-header">
-              <h4 class="content-title fs-16">Add Testimonial</h4>
+              <h4 class="content-title fs-16">Edit Testimonial</h4>
             </div>
             <div>
               <form action="/blog/share-testimonial" method="post">
@@ -41,44 +41,52 @@
                   <input type="file" name="testimonial_profile" id="preview_img"
                     accept="image/png, image/gif, image/jpeg">
                   <div>
-                    <img src="http://localhost:3000/img/temp.png" alt="Blog Preview Image">
+                    <img src="<%= testimonial.testimonial_profile %>" alt="Blog Preview Image">
                   </div>
 
                 </div>
                 <div class="form-input">
                   <label for="testimonial_name" class="text-primary">Person Full Name</label>
-                  <input type="text" name="testimonial_name" id="testimonial_name">
+                  <input value="<%= testimonial.testimonial_name %>" type="text" name="testimonial_name"
+                    id="testimonial_name">
                 </div>
                 <div class="form-input">
                   <label for="testimonial_position" class="text-primary">Person Position or Status</label>
-                  <input type="text" name="testimonial_position" id="testimonial_position">
+                  <input type="text" value="<%= testimonial.testimonial_position %>" name="testimonial_position"
+                    id="testimonial_position">
                 </div>
 
                 <div class="form-input">
                   <label for="testimonial_text" class="text-primary">Testimonial Text</label>
                   <div id="editor">
+                    <%- testimonial.testimonial_text %>
                   </div>
                 </div>
                 <div class="form-input">
                   <label for="testimonial_rate" class="text-primary">Testimonial Rate</label>
                   <div id="testimonials-stars" class="stars">
-                    <input type="radio" id="star5" name="testimonial_rate" value="5" />
+                    <input type="radio" <%=testimonial.testimonial_rate===5 && 'checked' %> id="star5"
+                    name="testimonial_rate" value="5" />
                     <label for="star5" title="5 stars"></label>
-                    <input type="radio" id="star4" name="testimonial_rate" value="4" />
+                    <input type="radio" <%=testimonial.testimonial_rate===4 && 'checked' %> id="star4"
+                    name="testimonial_rate" value="4" />
                     <label for="star4" title="4 stars"></label>
-                    <input type="radio" id="star3" name="testimonial_rate" value="3" />
+                    <input type="radio" <%=testimonial.testimonial_rate===3 && 'checked' %> id="star3"
+                    name="testimonial_rate" value="3" />
                     <label for="star3" title="3 stars"></label>
-                    <input type="radio" id="star2" name="testimonial_rate" value="2" />
+                    <input type="radio" <%=testimonial.testimonial_rate===2 && 'checked' %> id="star2"
+                    name="testimonial_rate" value="2" />
                     <label for="star2" title="2 stars"></label>
-                    <input type="radio" id="star1" name="testimonial_rate" value="1" />
+                    <input type="radio" <%=testimonial.testimonial_rate===1 && 'checked' %> id="star1"
+                    name="testimonial_rate" value="1" />
                     <label for="star1" title="1 star"></label>
                   </div>
                 </div>
                 <div class="divider"></div>
-                <button onclick="questionAndActionAlert(() => {addTestimonial()})" type="button"
-                  class="submit-btn fs-14">
-                  <i class="fa-solid fa-check"></i>
-                  Share
+                <button onclick="questionAndActionAlert(() => {updateTestimonial('<%= testimonial.id %>')})"
+                  type="button" class="submit-btn fs-14">
+                  <i class="fa-solid fa-floppy-disk"></i>
+                  Save
                 </button>
               </form>
             </div>
@@ -96,6 +104,19 @@
         placeholder: 'Start writing testimonial here or paste',
 
       });
+    </script>
+    <script>
+      async function setImageToFileInput(imageUrl, fileInputId) {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const file = new File([blob], "<%=testimonial.image_name%>", { type: blob.type });
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        document.getElementById(fileInputId).files = dataTransfer.files;
+      }
+
+      // Kullanım
+      setImageToFileInput('<%=testimonial.testimonial_profile%>', 'preview_img');
     </script>
 </body>
 

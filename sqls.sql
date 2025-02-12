@@ -20,3 +20,27 @@ CREATE TABLE blogs (
 	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE testimonials (
+    id SERIAL PRIMARY KEY,
+    admin_id INTEGER NOT NULL REFERENCES admins(id),
+    testimonial_name TEXT NOT NULL,
+    testimonial_position TEXT NOT NULL,
+    testimonial_rate INTEGER NOT NULL,
+    testimonial_text VARCHAR(255) NOT NULL,
+    testimonial_profile VARCHAR(255) NOT NULL,
+    image_name varchar(100) not null,
+    createdat TIMESTAMP DEFAULT NOW(),
+    updatedat TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE portfolios (
+    id SERIAL PRIMARY KEY,
+    admin_id INTEGER NOT NULL REFERENCES admins(id),
+    preview_img VARCHAR(255) NOT NULL,
+    portfolio_title TEXT NOT NULL,
+    image_name VARCHAR(255) NOT NULL,
+    createdat TIMESTAMP DEFAULT NOW(),
+    updatedat TIMESTAMP DEFAULT NOW()
+);
+

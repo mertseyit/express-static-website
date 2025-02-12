@@ -39,84 +39,72 @@
               </div>
             </div>
             <div style="overflow-x: auto;">
-              <table class="content-table">
-                <thead>
-                  <tr>
-                    <th>Person Image</th>
-                    <th>Person</th>
-                    <th>Content</th>
-                    <th>Rate</th>
-                    <th class="action-row">
-                      <div class="w-70">Action</div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div>
-                        <img src="img/300x300.png" class="w-50" alt="Blog Image">
-                      </div>
-                    </td>
-                    <td>
-                      <div class="w-100 line-2">
-                        Ahmet Kaya
-                      </div>
-                    </td>
-                    <td>
-                      <div class="w-500 line-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magni cupiditate sapiente
-                        mollitia
-                        omnis quibusdam temporibus explicabo modi consequatur ratione tempore corporis provident maxime
-                        recusandae optio id eius odit, est ea ipsa autem! Quae, aliquam! Esse delectus ullam possimus
-                        neque
-                        veniam a labore ex architecto minus, quasi similique suscipit voluptas qui nulla facilis rem?
-                        Voluptatem eius doloremque repellendus a labore exercitationem atque natus consequatur officiis
-                        ratione id, eum numquam non facilis at nesciunt beatae nam ad aut! Autem, maxime. Voluptatibus
-                        quas
-                        sequi saepe voluptatum autem ullam odit in animi sit deserunt, optio, asperiores consequuntur.
-                        Soluta accusamus nisi perferendis illum, numquam eveniet iusto alias sapiente dolorum voluptate
-                        rerum quo minus tenetur repellendus ea odit deleniti quidem? Ipsum delectus nihil fugit
-                        accusantium
-                        laboriosam sint exercitationem iusto. Distinctio ratione sunt esse tempora exercitationem, ea
-                        corrupti rerum? Facilis quod repellat ducimus, officia tempora necessitatibus mollitia inventore
-                        magnam consequuntur minima ut eaque voluptates tempore? Culpa aut aspernatur iste repellat. In
-                        aliquid pariatur, culpa nam maiores assumenda sequi modi saepe quo blanditiis exercitationem
-                        suscipit itaque? Qui mollitia necessitatibus magni modi voluptatum sapiente! Cumque quae
-                        expedita,
-                        harum atque corrupti nulla nostrum aspernatur? Fugit quod doloribus accusamus. Totam expedita
-                        tempore aliquid eligendi, dolorem inventore provident aperiam animi illo.
-                      </div>
-                    </td>
+              <% if(testimonials.length===0){ %>
+                <div style="margin-top: 15px;" class="fs-12">No data found</div>
+                <%} else{ %>
+                  <table class="content-table">
+                    <thead>
+                      <tr>
+                        <th class="text-nowrap">Image</th>
+                        <th class="text-nowrap">Person</th>
+                        <th class="text-nowrap">Content</th>
+                        <th class="text-nowrap">Rate</th>
+                        <th class="action-row">
+                          <div class="w-70">Action</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% testimonials.forEach((testimonial,index)=> {%>
+                        <tr>
+                          <td class="w-50">
+                            <div class="content-img">
+                              <img src="<%= testimonial.testimonial_profile %>" class="w-50" alt="Testimonial Profile">
+                            </div>
+                          </td>
+                          <td class="w-250px">
+                            <div class="line-1 ">
+                              <%=testimonial.testimonial_name%>
+                            </div>
+                          </td>
+                          <td class="w-100">
+                            <div class="line-1 ">
+                              <%=testimonial.testimonial_text%>
+                            </div>
+                          </td>
+                          <td class="w-100">
+                            <div class="w-100 rate rate-<%-testimonial.testimonial_rate%>">
+                              <i class="fa-solid fa-star"></i>
+                              <i class="fa-solid fa-star"></i>
+                              <i class="fa-solid fa-star"></i>
+                              <i class="fa-solid fa-star"></i>
+                              <i class="fa-solid fa-star"></i>
+                            </div>
+                          </td>
+                          <td class="action-row two-action">
+                            <div class="w-100">
+                              <a href="/admin/testimonials/update/<%=testimonial.id%>" class="edit">
+                                <i class="fa-solid fa-file-pen"></i>
+                              </a>
+                              <button onclick="deleteTestimonial('<%= testimonial.id %>')" class="delete">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        <% });%>
 
-                    <td>
-                      <div class="w-100 rate">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                      </div>
-                    </td>
-                    <td class="action-row">
-                      <div class="w-70">
-                        <a href="/admin/testimonials/edit/1" class="edit">
-                          <i class="fa-solid fa-file-pen"></i>
-                        </a>
-                        <button class="delete">
-                          <i class="fa-solid fa-trash"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                    </tbody>
+                  </table>
 
-                </tbody>
-              </table>
+                  <% } %>
+
             </div>
           </div>
         </main>
     </div>
     <script src="js/admin.main.js"></script>
+    <script src="js/admin.requests.js"></script>
     <script src="js/admin.sweetalert.js"></script>
     <script src="js/admin.customSweetAlert.js"></script>
 

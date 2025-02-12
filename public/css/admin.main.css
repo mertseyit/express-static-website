@@ -143,6 +143,10 @@ select {
   text-align: center;
 }
 
+.text-nowrap {
+  text-wrap: nowrap;
+}
+
 .fw-bold {
   font-weight: bold;
 }
@@ -468,6 +472,11 @@ button {
   width: 500px;
 }
 
+.w-250px {
+  max-width: 250px;
+  min-width: 250px;
+}
+
 .w-200 {
   width: 200px;
 }
@@ -504,6 +513,11 @@ th.actions-row, td.actions-row {
 
 .content-table tr:nth-child(even) {
   background-color: #fafafa;
+}
+
+.action-row.two-action {
+  max-width: 100px;
+  width: 100px;
 }
 
 .action-row div {
@@ -596,12 +610,24 @@ img.profile-img {
   gap: 10px;
 }
 
+.content-img img {
+  width: 100%;
+  height: 50px;
+  object-fit: cover;
+}
+
+.max-w-300 {
+  max-width: 300px;
+
+}
+
 .w-50 {
-  width: 50px;
+  min-width: 50px;
+  width: 70px;
 }
 
 .w-100 {
-  width: 100px;
+  width: 100%;
 }
 
 .rate {
@@ -612,6 +638,26 @@ img.profile-img {
 }
 
 .rate i {
+  color: var(--secondary-color);
+}
+
+.rate-1 i:nth-child(-n+1) {
+  color: var(--warning-color);
+}
+
+.rate-2 i:nth-child(-n+2) {
+  color: var(--warning-color);
+}
+
+.rate-3 i:nth-child(-n+3) {
+  color: var(--warning-color);
+}
+
+.rate-4 i:nth-child(-n+4) {
+  color: var(--warning-color);
+}
+
+.rate-5 i:nth-child(-n+5) {
   color: var(--warning-color);
 }
 
@@ -880,6 +926,13 @@ img.profile-img {
   animation: rotation 1s linear infinite;
 }
 
+.thumnail-image img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
 @keyframes rotation {
   0% {
       transform: rotate(0deg);
@@ -904,6 +957,13 @@ body.modal-open {
 @media(max-width:768px) {
   .login-page {
     padding: 0 32px;
+  }
+
+  .content-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: start;
+    justify-content: start;
   }
 }
 

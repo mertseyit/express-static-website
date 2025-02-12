@@ -3,8 +3,8 @@ const sequelize = require('../database/db');
 const bcrypt = require('bcrypt');
 const Admin = require('./Admin');
 
-const Blog = sequelize.define(
-  'Blog',
+const Testimonial = sequelize.define(
+  'Testimonial',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -20,22 +20,52 @@ const Blog = sequelize.define(
         key: 'admin_id',
       },
     },
-    blog_title: {
-      type: DataTypes.STRING,
+    testimonial_name: {
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Blog title require',
+          msg: 'Name require',
         },
       },
     },
 
-    preview_img: {
+    testimonial_position: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Position require',
+        },
+      },
+    },
+
+    testimonial_rate: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Rate require',
+        },
+      },
+    },
+
+    testimonial_text: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Image require',
+          msg: 'Text require',
+        },
+      },
+    },
+
+    testimonial_profile: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Profile require',
         },
       },
     },
@@ -46,16 +76,6 @@ const Blog = sequelize.define(
       validate: {
         notNull: {
           msg: 'Image name require',
-        },
-      },
-    },
-
-    blog_text: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Blog text require',
         },
       },
     },
@@ -72,9 +92,9 @@ const Blog = sequelize.define(
     createdAt: false,
     updatedAt: false,
     freezeTableName: true,
-    modelName: 'Blog',
-    tableName: 'blogs',
+    modelName: 'Testimonial',
+    tableName: 'testimonials',
   }
 );
 
-module.exports = Blog;
+module.exports = Testimonial;

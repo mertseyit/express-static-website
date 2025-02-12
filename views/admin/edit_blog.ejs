@@ -18,11 +18,11 @@
 
         <main class="container main-calculated">
           <div class="pagination">
-            <a href="index.html" class="text-primary">
+            <a href="/admin/home" class="text-primary">
               <i class="fa-solid fa-house fs-16"></i>
             </a>
             <span class="fs-18">/</span>
-            <a href="blogs.html" class="text-primary fs-14">
+            <a href="/admin/blogs" class="text-primary fs-14">
               Blogs
             </a>
             <span class="fs-18">/</span>
@@ -38,15 +38,17 @@
               <form action="/blog/share-blog" method="post">
                 <div class="form-input">
                   <label for="blog_title" class="text-primary">
-                    <%= blog.blog_title %>
+                    Blog Title
                   </label>
-                  <input value="Blog Title" type="text" name="blog_title" id="blog_title">
+                  <input value="<%= blog.blog_title %>" type="text" name="blog_title" id="blog_title">
                 </div>
                 <div class="form-input thumnail-image">
                   <label for="blog_image" class="text-primary">Blog Image</label>
-                  <input type="file" name="blog_image" id="blog_image" accept="image/png, image/gif, image/jpeg">
-                  <img style="width: 100px; height: 100px; object-fit: cover;" src="<%= blog.preview_img %>"
-                    alt="Blog Image">
+                  <input type="file" name="blog_image" id="preview_img" accept="image/png, image/gif, image/jpeg">
+                  <div>
+                    <img src="<%= blog.preview_img %>" alt="Blog Preview Image">
+                  </div>
+
                 </div>
                 <div class="form-input">
                   <label for="blog_text" class="text-primary">Blog Text</label>
@@ -55,7 +57,7 @@
                   </div>
                 </div>
                 <div class="divider"></div>
-                <button onclick="questionAndActionAlert(() => { updateBlog(<%= blog.blog_id %>) })" type="button"
+                <button onclick="questionAndActionAlert(() => { updateBlog('<%= blog.id %>') })" type="button"
                   class="submit-btn fs-14">
                   <i class="fa-solid fa-floppy-disk"></i>
                   Save
@@ -76,6 +78,21 @@
         placeholder: 'Start writing testimonial here or paste',
 
       });
+    </script>
+    <script>
+      async function setImageToFileInput(imageUrl, fileInputId) {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const file = new File([blob], "<%=blog.image_name%>", { type: blob.type });
+
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+
+        document.getElementById(fileInputId).files = dataTransfer.files;
+      }
+
+      // Kullanım
+      setImageToFileInput('<%=blog.preview_img%>', 'preview_img');
     </script>
 </body>
 

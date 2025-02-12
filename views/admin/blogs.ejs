@@ -40,48 +40,56 @@
               </div>
             </div>
             <div style="overflow-x: auto;">
-              <table class="content-table">
-                <thead>
-                  <tr>
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th class="action-row">
-                      <div class="w-70">Action</div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% blogs.forEach((blog,index)=> {%>
-                    <tr>
-                      <td>
-                        <div>
-                          <img src="<%= blog.preview_img %>" class="w-50" alt="Blog Image">
-                        </div>
-                      </td>
-                      <td>
-                        <div style="width: 100%;" class="line-1">
-                          <%=blog.blog_title%>
-                        </div>
-                      </td>
-                      <td class="action-row">
-                        <div class="w-70">
-                          <a href="/admin/blogs/update/<%=blog.id%>" class="edit">
-                            <i class="fa-solid fa-file-pen"></i>
-                          </a>
-                          <button onclick="deleteAlert(() => {console.log('Deleted !')})" class="delete">
-                            <i class="fa-solid fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <% });%>
-                </tbody>
-              </table>
+              <% if(blogs.length===0){ %>
+                <div style="margin-top: 15px;" class="fs-12">No data found</div>
+                <%} else{ %>
+                  <table class="content-table">
+                    <thead>
+                      <tr>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th class="action-row">
+                          <div class="w-70">Action</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% blogs.forEach((blog,index)=> {%>
+                        <tr>
+                          <td class="w-50">
+                            <div class="content-img">
+                              <img src="<%= blog.preview_img %>" class="w-50" alt="Blog Image">
+                            </div>
+                          </td>
+                          <td class="w-100">
+                            <div class="line-1 ">
+                              <%=blog.blog_title%>
+                            </div>
+                          </td>
+                          <td class="action-row two-action">
+                            <div class="w-100">
+                              <a href="/admin/blogs/update/<%=blog.id%>" class="edit">
+                                <i class="fa-solid fa-file-pen"></i>
+                              </a>
+                              <button onclick="deleteBlog('<%= blog.id %>')" class="delete">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        <% });%>
+
+                    </tbody>
+                  </table>
+
+                  <% } %>
+
             </div>
           </div>
         </main>
     </div>
     <script src="js/admin.main.js"></script>
+    <script src="js/admin.requests.js"></script>
     <script src="js/admin.sweetalert.js"></script>
     <script src="js/admin.customSweetAlert.js"></script>
 

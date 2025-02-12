@@ -4,11 +4,12 @@ const uploadStorage = require('../../multer/storage');
 const Blog = require('../../models/Blog');
 const generateFilePath = require('../../helpers/generateFilePath');
 const createCustomErrorMsg = require('../../helpers/createCustomErrorMsg');
+const path = require('path');
+const findExistFileAndRemove = require('../../helpers/findExistFileAndRemove');
 
 router.get('/', async (req, res, next) => {
   try {
     const blogs = await Blog.findAll();
-    console.log(blogs[0].dataValues);
     res.status(status.OK).render('admin/blogs', {
       activePage: 'blogs',
       blogs: blogs,
@@ -65,15 +66,21 @@ router.post(
           status: status.BAD_REQUEST,
         });
       }
+      if (!req.file) {
+        return res.status(status.BAD_REQUEST).json({
+          message: 'Blog image require',
+          status: status.BAD_REQUEST,
+        });
+      }
       await Blog.create({
         admin_id: id,
         blog_title: blog_title,
-        preview_img: generateFilePath(req.file.filename),
+        preview_img: generateFilePath(req.file.filename, 'img/blogs'),
         image_name: req.file.filename,
         blog_text: blog_text,
       });
       res.status(status.CREATED).json({
-        message: 'Blog Shared !',
+        message: 'Blog shared !',
         status: status.CREATED,
       });
     } catch (error) {
@@ -85,22 +92,60 @@ router.post(
   }
 );
 
-router.patch(
+router.post(
   '/update/:id',
   uploadStorage.single('preview_img'),
   async (req, res, next) => {
     try {
       const { blog_title, blog_text } = req.body;
+      console.log(blog_text);
+      if (!req.file) {
+        return res.status(status.BAD_REQUEST).json({
+          message: 'Blog image require',
+          status: status.BAD_REQUEST,
+        });
+      }
       const { id } = req.params;
+      const existBlog = await Blog.findOne({ where: { id: id } });
+      if (!existBlog.dataValues) {
+        return res.status(status.NOT_FOUND).json({
+          message: 'Blog not found for update',
+          status: status.NOT_FOUND,
+        });
+      }
+
+      const image_path = path.join(
+        `${__dirname}`,
+        '..',
+        '..',
+        'public',
+        'img',
+        'blogs',
+        `${existBlog.dataValues.image_name}`
+      );
+
       await Blog.update(
         {
           blog_title: blog_title,
           blog_text: blog_text,
+          preview_img: generateFilePath(req.file.filename, 'img/blogs'),
+          image_name: req.file
+            ? req.file.filename
+            : existBlog.dataValues.image_name,
         },
         { where: { id: id } }
       );
+
+      const response = await findExistFileAndRemove(image_path);
+      if (!response) {
+        return res.status(status.INTERNAL_SERVER_ERROR).json({
+          message: 'Someting went wrong. Please try again later',
+          status: status.INTERNAL_SERVER_ERROR,
+        });
+      }
+
       res.status(status.OK).json({
-        msg: 'Blog Upadated !',
+        message: 'Blog upadated !',
         status: status.OK,
       });
     } catch (error) {
@@ -111,5 +156,48 @@ router.patch(
     }
   }
 );
+
+router.delete('/delete/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const existBlog = await Blog.findOne({ where: { id: id } });
+    if (!existBlog) {
+      return res.status(status.NOT_FOUND).json({
+        message: 'Blog not found',
+        status: status.NOT_FOUND,
+      });
+    }
+
+    const image_path = path.join(
+      `${__dirname}`,
+      '..',
+      '..',
+      'public',
+      'img',
+      'blogs',
+      `${existBlog.dataValues.image_name}`
+    );
+
+    const response = await findExistFileAndRemove(image_path);
+    if (!response) {
+      return res.status(status.INTERNAL_SERVER_ERROR).json({
+        message: 'Someting went wrong. Please try again later',
+        status: status.INTERNAL_SERVER_ERROR,
+      });
+    }
+
+    await Blog.destroy({ where: { id: id } });
+
+    res.status(status.OK).json({
+      message: 'Blog Deleted !',
+      status: status.OK,
+    });
+  } catch (error) {
+    res.status(status.BAD_REQUEST).json({
+      message: `${createCustomErrorMsg(error)}`,
+      status: status.BAD_REQUEST,
+    });
+  }
+});
 
 module.exports = router;

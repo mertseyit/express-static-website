@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
-  <link rel="stylesheet" href="../../css/admin.quill.snow.css">
   <link rel="stylesheet" href="../../css/admin.main.css">
   <link rel="stylesheet" href="../../css/admin.fontawesome.all.min.css">
 </head>
@@ -41,17 +40,14 @@
                   <input type="text" name="portfolio_title" id="portfolio_title">
                 </div>
                 <div class="form-input thumnail-image">
-                  <label for="portfolio_image" class="text-primary">Portfolio Image</label>
-                  <input type="file" name="portfolio_image" id="preview_img" accept="image/png, image/gif, image/jpeg">
-                </div>
-                <div class="form-input">
-                  <label for="portfolio" class="text-primary">Portfolio Text</label>
-                  <div id="editor">
+                  <label for="preview_img" class="text-primary">Portfolio Image</label>
+                  <input type="file" name="preview_img" id="preview_img" accept="image/png, image/gif, image/jpeg">
+                  <div>
+                    <img src="http://localhost:3000/img/temp.png" alt="Blog Preview Image">
                   </div>
                 </div>
                 <div class="divider"></div>
-                <button onclick="questionAndActionAlert(() => {console.log('Shared !')})" type="button"
-                  class="submit-btn fs-14">
+                <button onclick="questionAndActionAlert(() => {addPortfolio()})" type="button" class="submit-btn fs-14">
                   <i class="fa-solid fa-check"></i>
                   Share
                 </button>
@@ -61,16 +57,8 @@
         </main>
     </div>
     <script src="../../js/admin.main.js"></script>
-    <script src="../../js/admin.quill.js"></script>
     <script src="../../js/admin.sweetalert.js"></script>
     <script src="../../js/admin.customSweetAlert.js"></script>
-    <script>
-      const quill = new Quill('#editor', {
-        theme: 'snow',
-        placeholder: 'Start writing blog here...',
-
-      });
-    </script>
 </body>
 
 </html>

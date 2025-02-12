@@ -3,8 +3,8 @@ const sequelize = require('../database/db');
 const bcrypt = require('bcrypt');
 const Admin = require('./Admin');
 
-const Blog = sequelize.define(
-  'Blog',
+const Portfolio = sequelize.define(
+  'Portfolio',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -20,22 +20,21 @@ const Blog = sequelize.define(
         key: 'admin_id',
       },
     },
-    blog_title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Blog title require',
-        },
-      },
-    },
-
     preview_img: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
           msg: 'Image require',
+        },
+      },
+    },
+    portfolio_title: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Title require',
         },
       },
     },
@@ -46,16 +45,6 @@ const Blog = sequelize.define(
       validate: {
         notNull: {
           msg: 'Image name require',
-        },
-      },
-    },
-
-    blog_text: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Blog text require',
         },
       },
     },
@@ -72,9 +61,9 @@ const Blog = sequelize.define(
     createdAt: false,
     updatedAt: false,
     freezeTableName: true,
-    modelName: 'Blog',
-    tableName: 'blogs',
+    modelName: 'Portfolio',
+    tableName: 'portfolios',
   }
 );
 
-module.exports = Blog;
+module.exports = Portfolio;
