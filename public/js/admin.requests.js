@@ -6,7 +6,7 @@ const addBlog = async () => {
   formData.append('blog_title', blogTitle.value);
   const blogImage = document.getElementById('preview_img');
   formData.append('preview_img', blogImage.files[0]);
-  const blogText = document.querySelector('#editor .ql-editor p');
+  const blogText = document.querySelector('#editor .ql-editor');
   formData.append('blog_text', `${blogText.innerHTML}`);
   const response = await fetch('/admin/blogs/add?path=blogs', {
     method: 'post',
@@ -97,7 +97,7 @@ const addTestimonial = async () => {
   formData.append('testimonial_name', testimonialName.value);
   const testimonialPosition = document.getElementById('testimonial_position');
   formData.append('testimonial_position', testimonialPosition.value);
-  const testimonialText = document.querySelector('#editor .ql-editor p');
+  const testimonialText = document.querySelector('#editor .ql-editor ');
   formData.append('testimonial_text', `${testimonialText.innerHTML}`);
   const testimonialsStars = document.getElementsByName('testimonial_rate');
   testimonialsStars.forEach((input) => {
@@ -132,7 +132,7 @@ const updateTestimonial = async (id) => {
   formData.append('testimonial_name', testimonialName.value);
   const testimonialPosition = document.getElementById('testimonial_position');
   formData.append('testimonial_position', testimonialPosition.value);
-  const testimonialText = document.querySelector('#editor .ql-editor p');
+  const testimonialText = document.querySelector('#editor .ql-editor ');
   formData.append('testimonial_text', `${testimonialText.innerHTML}`);
   const testimonialsStars = document.getElementsByName('testimonial_rate');
   testimonialsStars.forEach((input) => {
