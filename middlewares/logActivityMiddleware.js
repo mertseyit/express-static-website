@@ -1,7 +1,6 @@
 const ActivityLog = require('../models/ActivityLog');
 const activityLogMiddleware = async (req, res, next) => {
   try {
-    console.log(req.body);
     await ActivityLog.create({
       admin_name: `${req.user.id}`,
       ip_address: req.ip.includes('::ffff:')

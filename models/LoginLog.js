@@ -13,24 +13,11 @@ const LoginLog = sequelize.define(
     },
     admin_name: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Admin name require',
-        },
-      },
+      allowNull: true,
     },
     admin_email: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Admin name require',
-        },
-        isEmail: {
-          msg: 'Admin email must be valid',
-        },
-      },
+      allowNull: true,
     },
     ip_address: {
       type: DataTypes.STRING,
@@ -58,6 +45,8 @@ const LoginLog = sequelize.define(
           ? 'INCORRECT_PASSWORD'
           : rawValue === 2
           ? 'SUCCESS'
+          : rawValue === 3
+          ? 'USER_NOT_FOUND'
           : 'UNDEFINED';
       },
     },

@@ -4,8 +4,13 @@ const ActivityLog = require('../../models/ActivityLog');
 const LoginLog = require('../../models/LoginLog');
 router.get('/', async (req, res, next) => {
   try {
-    const activityLogs = await ActivityLog.findAll();
-    const loginLogs = await LoginLog.findAll();
+    const activityLogs = await ActivityLog.findAll({
+      order: [['createdat', 'DESC']],
+    });
+
+    const loginLogs = await LoginLog.findAll({
+      order: [['createdat', 'DESC']],
+    });
     res.status(status.OK).render('admin/logs', {
       activePage: 'logs',
       activityLogs: activityLogs,

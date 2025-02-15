@@ -11,9 +11,9 @@ const userAuthMiddleware = require('./middlewares/userAuthMiddleware');
 //routes
 const indexRouter = require('./routes/index.route');
 const aboutRouter = require('./routes/about.route');
-const servicesRouter = require('./routes/services.route');
+const servicesRouter = require('./routes/testimonial.route');
 const portfolioRouter = require('./routes/portfolio.route');
-const teamRouter = require('./routes/team.route');
+const blogRouter = require('./routes/blog.route');
 const contactRouter = require('./routes/contact.route');
 //admin routes
 const adminIndexRouter = require('./routes/admin/index.route');
@@ -23,7 +23,7 @@ const adminPortfoliosRoute = require('./routes/admin/portfolios.rotue');
 const adminFeedbacksRoute = require('./routes/admin/feedbacks.route');
 const adminSigninRoute = require('./routes/admin/signin.route');
 const adminSignupRoute = require('./routes/admin/signup.route');
-const adminWhoAmIRoute = require('./routes/admin/whoami.route');
+const adminLogoutRoute = require('./routes/admin/logout.route');
 const adminVerifyEmailRoute = require('./routes/admin/verify-email.route');
 const adminProfileRoute = require('./routes/admin/profile.route');
 const adminLogsRoute = require('./routes/admin/logs.route');
@@ -58,7 +58,7 @@ app.use(indexRouter);
 app.use(aboutRouter);
 app.use(servicesRouter);
 app.use(portfolioRouter);
-app.use(teamRouter);
+app.use(blogRouter);
 app.use(contactRouter);
 //admin routes
 app.use('/admin/home', userAuthMiddleware, adminIndexRouter);
@@ -71,7 +71,7 @@ app.use('/admin/logs', userAuthMiddleware, adminLogsRoute);
 app.use('/admin/signin', adminSigninRoute);
 app.use('/admin/signup', adminSignupRoute);
 app.use('/admin/auth', adminVerifyEmailRoute);
-app.use('/admin/auth', userAuthMiddleware, adminWhoAmIRoute);
+app.use('/admin/logout', userAuthMiddleware, adminLogoutRoute);
 
 app.use('/*', (req, res, next) => {
   res.status(404).render('404', {

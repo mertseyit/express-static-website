@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head', {data:"testimonials-active"}) %>
+
+  <body class="index-page">
+
+    <%- include('partials/navbar', {data:"testimonials-active"} ) %>
+
+      <main class="main">
+        <%- include('partials/header') %>
+          <!-- Services Section -->
+          <section id="testimonials" class="testimonials section">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+              <h2>Testimonials</h2>
+              <div><span>See Our</span> <span class="description-title">Testimonials</span></div>
+            </div><!-- End Section Title -->
+
+            <div class="container">
+
+              <div class="row gy-4">
+                <% testimonials.forEach((testimonial,index)=> {%>
+                  <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-item">
+                      <img src="<%= testimonial.testimonial_profile %>" class="testimonial-img" alt="">
+                      <h3>
+                        <%= testimonial.testimonial_name %>
+                      </h3>
+                      <h4>
+                        <%= testimonial.testimonial_position %>
+                      </h4>
+                      <div class="stars start-<%= testimonial.testimonial_rate %>">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                          class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                      <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>
+                          <%- testimonial.testimonial_text %>
+                        </span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                      </p>
+                    </div>
+                  </div><!-- End testimonial item -->
+                  <% });%>
+              </div>
+
+            </div>
+
+          </section><!-- /Services Section -->
+
+      </main>
+
+      <%- include('partials/footer') %>
+
+  </body>
+
+</html>

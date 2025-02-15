@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head', {data:"blog-active"}) %>
+
+  <body class="index-page">
+
+    <%- include('partials/navbar', {data:"blog-active"} ) %>
+
+      <main class="main">
+        <%- include('partials/header') %>
+          <!-- Portfolio Section -->
+          <section id="portfolio" class="portfolio section">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+              <h2>Blogs</h2>
+              <div><span>Check Our</span> <span class="description-title">Blogs</span></div>
+            </div><!-- End Section Title -->
+
+            <div class="container">
+              <div class="row g-4 ">
+                <% blogs.forEach((blogs,index)=> {%>
+                  <article class="col-lg-3 col-md-4 col-12">
+                    <div class="basarim-card">
+                      <img src="<%=blogs.preview_img %>" alt="Blog görseli">
+                      <div class="basarim-card-content">
+                        <h2 class="basarim-card-title">
+                          <%=blogs.blog_title %>
+                        </h2>
+                        <a href="/blogs/<%=blogs.id %>" class="basarim-card-link">Details</a>
+                      </div>
+                    </div>
+                  </article>
+                  <% });%>
+              </div><!-- End Portfolio Container -->
+            </div>
+
+          </section><!-- /Portfolio Section -->
+
+      </main>
+
+      <%- include('partials/footer') %>
+
+  </body>
+
+</html>

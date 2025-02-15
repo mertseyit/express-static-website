@@ -508,3 +508,25 @@ const signIn = async () => {
     });
   }
 };
+
+const logOut = async () => {
+  const response = await fetch('/admin/logout', {
+    method: 'post',
+  });
+  const data = await response.json();
+  if (data.status !== 200) {
+    Swal.fire({
+      title: `${data.message}`,
+      icon: 'error',
+    });
+  } else {
+    Swal.fire({
+      title: `${data.message}`,
+      icon: 'success',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = 'signin';
+      }
+    });
+  }
+};

@@ -1,13 +1,16 @@
 const router = require('express').Router();
 const { status } = require('http-status');
 const createCustomErrorMsg = require('../helpers/createCustomErrorMsg');
-router.get('/team', (req, res, next) => {
+const Testimonial = require('../models/Testimonial');
+router.get('/testimonials', async (req, res, next) => {
   try {
-    res.status(status.OK).render('team', {
+    const testimonials = await Testimonial.findAll();
+    res.status(status.OK).render('testimonials', {
       title: 'First Express Static Example',
-      description: 'This is an description for team page',
-      keywords: 'All, team, keywords',
-      pageHeader: 'Our Team',
+      description: 'This is an description for testimonials page',
+      keywords: 'All, testimonials, keywords',
+      pageHeader: 'Testimonials',
+      testimonials: testimonials,
     });
   } catch (error) {
     res.status(status.BAD_REQUEST).json({

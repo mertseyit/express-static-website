@@ -1035,6 +1035,10 @@ img.profile-img {
   color: var();
   background-color: var(--warning-color-light);
 }
+.badge-USER_NOT_FOUND {
+  color: var();
+  background-color: var(--info-color-light);
+}
 
 
 @keyframes rotation {

@@ -101,7 +101,6 @@ router.patch(
   async (req, res, next) => {
     try {
       const { blog_title, blog_text } = req.body;
-      console.log(blog_text);
       if (!req.file) {
         return res.status(status.BAD_REQUEST).json({
           message: 'Blog image require',
