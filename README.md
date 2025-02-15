@@ -25,3 +25,25 @@ Tüm kurulumları yaptıktan sonra `npm run dev` komutu ile projeyi başlatabili
 <hr>
 
 Profilimde yer alan iletişim bilgileri benimle iletişime geçebilirsiniz.
+
+## Kurumsal Sayfalara ve Admin Paneline Erişim.
+
+Projenin `3000` portunda `localhost` olarak ayarlanırsa sayfa URL bilgileri aşağıdakiler gibi olcaktır.
+
+Kurumsallar için:
+
+1. Home Page: http://localhost:3000
+2. About Us: http://localhost:3000/about
+3. Testimonials: http://localhost:3000/testimonials
+4. Portfolios: http://localhost:3000/portfolios
+5. Blogs: http://localhost:3000/blogs
+6. Contact: http://localhost:3000/contact
+
+Admin Paneli için:
+
+1. Admin Home Page: http://localhost:3000/admin/home
+2. Admin Signup Page: http://localhost:3000/admin/signup
+3. Admin Signin Page: http://localhost:3000/admin/signin
+4. Blogs Page: http://localhost:3000/admin/blogs
+
+   ...
