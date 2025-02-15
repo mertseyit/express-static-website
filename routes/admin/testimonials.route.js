@@ -6,6 +6,7 @@ const generateFilePath = require('../../helpers/generateFilePath');
 const createCustomErrorMsg = require('../../helpers/createCustomErrorMsg');
 const path = require('path');
 const findExistFileAndRemove = require('../../helpers/findExistFileAndRemove');
+const logActivityMiddlewre = require('../../middlewares/logActivityMiddleware');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -53,6 +54,7 @@ router.get('/add', async (req, res, next) => {
 
 router.post(
   '/add',
+  logActivityMiddlewre,
   uploadStorage.single('testimonial_profile'),
   async (req, res, next) => {
     try {
@@ -102,8 +104,9 @@ router.post(
   }
 );
 
-router.post(
+router.patch(
   '/update/:id',
+  logActivityMiddlewre,
   uploadStorage.single('testimonial_profile'),
   async (req, res, next) => {
     try {
@@ -173,7 +176,7 @@ router.post(
   }
 );
 
-router.delete('/delete/:id', async (req, res, next) => {
+router.delete('/delete/:id', logActivityMiddlewre, async (req, res, next) => {
   try {
     const { id } = req.params;
     const existTestimonial = await Testimonial.findOne({ where: { id: id } });
@@ -205,7 +208,7 @@ router.delete('/delete/:id', async (req, res, next) => {
     await Testimonial.destroy({ where: { id: id } });
 
     res.status(status.OK).json({
-      message: 'Blog Deleted !',
+      message: 'Testimonial Deleted !',
       status: status.OK,
     });
   } catch (error) {

@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/db');
 const bcrypt = require('bcrypt');
+const dateParserSimple = require('../helpers/dateParserSimple');
 
 const Admin = sequelize.define(
   'Admin',
@@ -47,13 +48,29 @@ const Admin = sequelize.define(
         notNull: { msg: 'Password is required' },
       },
     },
+    resetpasswordtoken: {
+      type: DataTypes.STRING, // Token string olarak saklanır
+      allowNull: true,
+    },
+    resetpasswordtokenexp: {
+      type: DataTypes.DATE, // Token süresi için Date kullanılır
+      allowNull: true,
+    },
     createdat: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
+      get() {
+        const rawValue = this.getDataValue('createdat');
+        return rawValue ? dateParserSimple(rawValue) : null;
+      },
     },
     updatedat: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
+      get() {
+        const rawValue = this.getDataValue('updatedat');
+        return rawValue ? dateParserSimple(rawValue) : null;
+      },
     },
   },
   {

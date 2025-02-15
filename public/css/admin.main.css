@@ -18,6 +18,11 @@
   --warning-color:#F6995C;
   --danger-color:#D35D6E;
   --info-color:#82A0D8;
+  --success-color-light:#5aa46980;
+  --warning-color-light:#f69a5c80;
+  --danger-color-light:#D35D6E80;
+  --info-color-light:#82A0D880;
+
 
 }
 
@@ -147,6 +152,10 @@ select {
   text-wrap: nowrap;
 }
 
+.text-italic {
+  font-style:italic ;
+}
+
 .fw-bold {
   font-weight: bold;
 }
@@ -251,6 +260,7 @@ select {
 .profile-box {
   display: flex;
   margin-bottom: 32px;
+  align-items: center;
 }
 
 .profile-box span {
@@ -398,7 +408,7 @@ button {
   border: 1px solid var();
 }
 
-.content-events a, .content-events button {
+.content-events a, .content-events button, button.update-profile, button.update-email, button.update-password {
   padding: 6px 12px;
   display: flex;
   align-items: center;
@@ -407,9 +417,52 @@ button {
   border-radius: 5px;
   font-weight: 600;
   color: white;
+  font-size: 14px;
 }
 
-.content-events a.add {
+span#reaming-time {
+  display: block;
+  text-align: center;
+  margin: 10px;
+}
+
+button.update-email {
+  background-color: var(--info-color);
+  border: 1px solid var(--info-color);
+}
+
+button.update-password {
+  background-color: var(--warning-color);
+  border: 1px solid var(--warning-color);
+}
+
+.flex-box {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.flex-box-start {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 16px;
+}
+
+.email-verify-btn {
+  background-color: transparent;
+  padding: 0 !important;
+  margin: 0;
+  border: none;
+  display: inline !important;
+  width: auto;
+  height: auto;
+}
+
+.content-events a.add, button.update-profile {
   border: 1px solid var(--success-color);
   background-color: var(--success-color);
 }
@@ -449,6 +502,7 @@ button {
 .content-box {
   padding: 16px;
   border-radius: 5px;
+  margin-bottom: 32px;
 }
 
 .content-table {
@@ -458,7 +512,7 @@ button {
   border: 1px solid var(--secondary-color);
   width: 100%;
   margin: 16px auto;
-  overflow-x: auto;
+  overflow-x: auto;overflow-y: auto;max-height: 400px;
 }
 
 .content-table th,
@@ -472,6 +526,16 @@ button {
   width: 500px;
 }
 
+.w-400px {
+  max-width: 350px;
+  min-width: 350px;
+}
+
+.w-80px {
+  max-width: 80px;
+  min-width: 80px;
+}
+
 .w-250px {
   max-width: 250px;
   min-width: 250px;
@@ -483,6 +547,10 @@ button {
 
 .w-70 {
   width: 100px;
+}
+
+.w-25px {
+  width: 25px;
 }
 
 th.actions-row, td.actions-row {
@@ -852,7 +920,7 @@ img.profile-img {
   width: 100%;
 }
 
-.password-input-show-hide-btn {
+.password-input-show-hide-btn, .password-input-show-hide-btn2 {
   display: flex;
   align-items: center;
   justify-content: start;
@@ -863,7 +931,7 @@ img.profile-img {
   width: 100%;
 }
 
-.password-input-show-hide-btn button {
+.password-input-show-hide-btn button, .password-input-show-hide-btn2 button {
   background-color: transparent;
   border: none;
   color: var(--black-color);
@@ -932,6 +1000,42 @@ img.profile-img {
   object-fit: cover;
   border-radius: 5px;
 }
+
+.badge {
+  padding: 5px 8px;
+  border-radius: 5px;
+  color: var(--black-color);
+}
+.badge.success {
+  background-color: var(--success-color-light);
+}
+.badge.error {
+  background-color: var(--danger-color-light);
+}
+.badge.error {
+  background-color: var(--warning-color-light);
+}
+
+
+.badge-UPDATE {
+  color: var();
+  background-color: var(--info-color-light);
+}
+
+.badge-CREATE, .badge-SUCCESS {
+  color: var();
+  background-color: var(--success-color-light);
+}
+.badge-DELETE, .badge-INCORRECT_PASSWORD {
+  color: var();
+  background-color: var(--danger-color-light);
+}
+
+.badge-UNAUTHORIZED {
+  color: var();
+  background-color: var(--warning-color-light);
+}
+
 
 @keyframes rotation {
   0% {

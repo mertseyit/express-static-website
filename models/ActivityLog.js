@@ -1,11 +1,9 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/db');
-const bcrypt = require('bcrypt');
-const Admin = require('./Admin');
 const dateParserSimple = require('../helpers/dateParserSimple');
 
-const Testimonial = sequelize.define(
-  'Testimonial',
+const ActivityLog = sequelize.define(
+  'ActivityLog',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,73 +11,55 @@ const Testimonial = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    admin_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: Admin,
-        key: 'admin_id',
-      },
-    },
-    testimonial_name: {
+    admin_name: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Name require',
+          msg: 'Admin require',
         },
       },
     },
-
-    testimonial_position: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Position require',
-        },
-      },
-    },
-
-    testimonial_rate: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Rate require',
-        },
-      },
-    },
-
-    testimonial_text: {
+    ip_address: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Text require',
+          msg: 'IP address require',
         },
       },
     },
 
-    testimonial_profile: {
+    event: {
+      type: DataTypes.INTEGER, // 0: created, 1: deleted, 2:updated (CRUD)
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Event type require',
+        },
+      },
+      get() {
+        const rawValue = this.getDataValue('event');
+        return rawValue === 0
+          ? 'CREATE'
+          : rawValue === 1
+          ? 'DELETE'
+          : rawValue === 2
+          ? 'UPDATE'
+          : 'UNDEFINED';
+      },
+    },
+
+    page: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Profile require',
+          msg: 'Page require',
         },
       },
     },
 
-    image_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Image name require',
-        },
-      },
-    },
     createdat: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
@@ -101,9 +81,9 @@ const Testimonial = sequelize.define(
     createdAt: false,
     updatedAt: false,
     freezeTableName: true,
-    modelName: 'Testimonial',
-    tableName: 'testimonials',
+    modelName: 'ActivityLog',
+    tableName: 'activity_logs',
   }
 );
 
-module.exports = Testimonial;
+module.exports = ActivityLog;

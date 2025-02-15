@@ -1,10 +1,19 @@
 const multer = require('multer');
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, `public/img/${req.query.path}`);
+    try {
+      cb(null, `public/img/${req.query.path}`);
+    } catch (error) {
+      console.error('Multer Error::.', error);
+    }
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
+    try {
+      cb(null, Date.now() + '-' + file.originalname);
+    } catch (error) {
+      console.error('Multer Error::.', error);
+    }
   },
 });
 

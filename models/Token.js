@@ -28,6 +28,22 @@ const Token = sequelize.define(
         },
       },
     },
+    createdat: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      get() {
+        const rawValue = this.getDataValue('createdat');
+        return rawValue ? dateParserSimple(rawValue) : null;
+      },
+    },
+    updatedat: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      get() {
+        const rawValue = this.getDataValue('updatedat');
+        return rawValue ? dateParserSimple(rawValue) : null;
+      },
+    },
   },
   {
     timestamps: false,

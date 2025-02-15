@@ -25,31 +25,34 @@
               Portfolios
             </a>
             <span class="fs-18">/</span>
-            <span class="current-page fw-bold fs-14">Add Portfolio</span>
+            <span class="current-page fw-bold fs-14">Edit Portfolio</span>
 
           </div>
 
           <div class="content-box fs-14 shadow">
             <div class="content-header">
-              <h4 class="content-title fs-16">Add Portfolio</h4>
+              <h4 class="content-title fs-16">Edit Portfolio</h4>
             </div>
             <div>
               <form action="/blog/share-blog" method="post">
                 <div class="form-input">
+                  <!-- TOOD: Burada kaldın. -->
                   <label for="portfolio_title" class="text-primary">Portfolio Title</label>
-                  <input type="text" name="portfolio_title" id="portfolio_title">
+                  <input value="<%= portfolio.portfolio_title %>" type="text" name="portfolio_title"
+                    id="portfolio_title">
                 </div>
                 <div class="form-input thumnail-image">
                   <label for="preview_img" class="text-primary">Portfolio Image</label>
                   <input type="file" name="preview_img" id="preview_img" accept="image/png, image/gif, image/jpeg">
                   <div>
-                    <img src="http://localhost:3000/img/temp.png" alt="Portfolio Preview Image">
+                    <img src="<%= portfolio.preview_img %>" alt="Portfolio Preview Image">
                   </div>
                 </div>
                 <div class="divider"></div>
-                <button onclick="questionAndActionAlert(() => {addPortfolio()})" type="button" class="submit-btn fs-14">
-                  <i class="fa-solid fa-check"></i>
-                  Share
+                <button onclick="questionAndActionAlert(() => {updatePortfolio('<%-portfolio.id%>')})" type="button"
+                  class="submit-btn fs-14">
+                  <i class="fa-solid fa-floppy-disk"></i>
+                  Save
                 </button>
               </form>
             </div>
@@ -60,7 +63,21 @@
     <script src="../../js/admin.requests.js"></script>
     <script src="../../js/admin.sweetalert.js"></script>
     <script src="../../js/admin.customSweetAlert.js"></script>
+    <script>
+      async function setImageToFileInput(imageUrl, fileInputId) {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const file = new File([blob], "<%=portfolio.image_name%>", { type: blob.type });
 
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+
+        document.getElementById(fileInputId).files = dataTransfer.files;
+      }
+
+      // Kullanım
+      setImageToFileInput('<%=portfolio.preview_img%>', 'preview_img');
+    </script>
 </body>
 
 </html>

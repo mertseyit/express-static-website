@@ -21,19 +21,22 @@ const adminBlogsRouter = require('./routes/admin/blogs.route');
 const adminTestimonialsRoute = require('./routes/admin/testimonials.route');
 const adminPortfoliosRoute = require('./routes/admin/portfolios.rotue');
 const adminFeedbacksRoute = require('./routes/admin/feedbacks.route');
-const adminSettingsRoute = require('./routes/admin/settings.route');
 const adminSigninRoute = require('./routes/admin/signin.route');
 const adminSignupRoute = require('./routes/admin/signup.route');
 const adminWhoAmIRoute = require('./routes/admin/whoami.route');
 const adminVerifyEmailRoute = require('./routes/admin/verify-email.route');
+const adminProfileRoute = require('./routes/admin/profile.route');
+const adminLogsRoute = require('./routes/admin/logs.route');
 const sequelize = require('./database/db');
 const app = express();
 
+app.enabled('trust proxy', true);
 app.use(cors());
 dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+
 //view engine and static file setup setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -63,7 +66,8 @@ app.use('/admin/blogs', userAuthMiddleware, adminBlogsRouter);
 app.use('/admin/testimonials', userAuthMiddleware, adminTestimonialsRoute);
 app.use('/admin/portfolios', userAuthMiddleware, adminPortfoliosRoute);
 app.use('/admin/feedbacks', userAuthMiddleware, adminFeedbacksRoute);
-app.use('/admin/settings', userAuthMiddleware, adminSettingsRoute);
+app.use('/admin/profile', userAuthMiddleware, adminProfileRoute);
+app.use('/admin/logs', userAuthMiddleware, adminLogsRoute);
 app.use('/admin/signin', adminSigninRoute);
 app.use('/admin/signup', adminSignupRoute);
 app.use('/admin/auth', adminVerifyEmailRoute);
@@ -79,8 +83,9 @@ app.use('/*', (req, res, next) => {
 
 //basic global error handler
 app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).render('error', { msg: 'Internal Server Error' });
+  res.status(500).render('error', {
+    msg: err.message,
+  });
 });
 
 (async () => {

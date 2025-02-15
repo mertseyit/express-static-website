@@ -21,7 +21,7 @@ router.post('/', uploadStorage.none(), async (req, res, next) => {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(status.BAD_REQUEST).json({
-        message: 'Some parameters missing',
+        message: 'Some parameters are missing',
         status: status.BAD_REQUEST,
       });
     }

@@ -34,172 +34,111 @@
                 </button>
               </div>
             </div>
-            <div style="overflow-x: auto;">
-              <table class="content-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Subject</th>
-                    <th>Message</th>
-                    <th>Date</th>
-                    <th class="action-row">
-                      <div class="w-70">Action</div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div style="width: 150px;" class="line-1 w-500">
-                        Mert Seyit Yılmaz
-                      </div>
-                    </td>
-                    <td>
-                      <div style="width: 200px;" class="line-1 w-500">
-                        Lorem ipsum dolor sit
-                      </div>
-                    </td>
-                    <td>
-                      <div class=" line-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magni cupiditate sapiente
-                        mollitia
-                        omnis quibusdam temporibus explicabo modi consequatur ratione tempore corporis provident maxime
-                        recusandae optio id eius odit, est ea ipsa autem! Quae, aliquam! Esse delectus ullam possimus
-                        neque
-                        veniam a labore ex architecto minus, quasi similique suscipit voluptas qui nulla facilis rem?
-                        Voluptatem eius doloremque repellendus a labore exercitationem atque natus consequatur officiis
-                        ratione id, eum numquam non facilis at nesciunt beatae nam ad aut! Autem, maxime. Voluptatibus
-                        quas
-                        sequi saepe voluptatum autem ullam odit in animi sit deserunt, optio, asperiores consequuntur.
-                        Soluta accusamus nisi perferendis illum, numquam eveniet iusto alias sapiente dolorum voluptate
-                        rerum quo minus tenetur repellendus ea odit deleniti quidem? Ipsum delectus nihil fugit
-                        accusantium
-                        laboriosam sint exercitationem iusto. Distinctio ratione sunt esse tempora exercitationem, ea
-                        corrupti rerum? Facilis quod repellat ducimus, officia tempora necessitatibus mollitia inventore
-                        magnam consequuntur minima ut eaque voluptates tempore? Culpa aut aspernatur iste repellat. In
-                        aliquid pariatur, culpa nam maiores assumenda sequi modi saepe quo blanditiis exercitationem
-                        suscipit itaque? Qui mollitia necessitatibus magni modi voluptatum sapiente! Cumque quae
-                        expedita,
-                        harum atque corrupti nulla nostrum aspernatur? Fugit quod doloribus accusamus. Totam expedita
-                        tempore aliquid eligendi, dolorem inventore provident aperiam animi illo.
-                      </div>
-                    </td>
-                    <td>
-                      <div class="w-500 line-3">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam magni cupiditate sapiente
-                        mollitia
-                        omnis quibusdam temporibus explicabo modi consequatur ratione tempore corporis provident maxime
-                        recusandae optio id eius odit, est ea ipsa autem! Quae, aliquam! Esse delectus ullam possimus
-                        neque
-                        veniam a labore ex architecto minus, quasi similique suscipit voluptas qui nulla facilis rem?
-                        Voluptatem eius doloremque repellendus a labore exercitationem atque natus consequatur officiis
-                        ratione id, eum numquam non facilis at nesciunt beatae nam ad aut! Autem, maxime. Voluptatibus
-                        quas
-                        sequi saepe voluptatum autem ullam odit in animi sit deserunt, optio, asperiores consequuntur.
-                        Soluta accusamus nisi perferendis illum, numquam eveniet iusto alias sapiente dolorum voluptate
-                        rerum quo minus tenetur repellendus ea odit deleniti quidem? Ipsum delectus nihil fugit
-                        accusantium
-                        laboriosam sint exercitationem iusto. Distinctio ratione sunt esse tempora exercitationem, ea
-                        corrupti rerum? Facilis quod repellat ducimus, officia tempora necessitatibus mollitia inventore
-                        magnam consequuntur minima ut eaque voluptates tempore? Culpa aut aspernatur iste repellat. In
-                        aliquid pariatur, culpa nam maiores assumenda sequi modi saepe quo blanditiis exercitationem
-                        suscipit itaque? Qui mollitia necessitatibus magni modi voluptatum sapiente! Cumque quae
-                        expedita,
-                        harum atque corrupti nulla nostrum aspernatur? Fugit quod doloribus accusamus. Totam expedita
-                        tempore aliquid eligendi, dolorem inventore provident aperiam animi illo.
-                      </div>
-                    </td>
-                    <td>
-                      <div style="width: 200px;" class="line-1 w-500">
-                        12 Ekim 2024 13:30:43
-                      </div>
-                    </td>
-                    <td class="action-row">
-                      <div class="w-70">
-                        <button onclick="deleteAlert(() => {console.log('Deleted !')})" class="delete">
-                          <i class="fa-solid fa-trash"></i>
-                        </button>
-                        <button class="show modal-open-btn" data-modal="modal1">
-                          <i class="fa-solid fa-eye"></i>
-                        </button>
-                        <a href="/admin/feedbacks/replay/1" class="replay">
-                          <i class="fa-solid fa-share"></i>
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div style="overflow-x: auto;overflow-y: auto;max-height: 400px;">
+              <% if(user_feedbacks.length===0){ %>
+                <div style="margin-top: 15px;" class="fs-12">No data found</div>
+                <%} else{ %>
+                  <table class="content-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th class="action-row">
+                          <div class="w-70">Action</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% user_feedbacks.forEach((user_feedback)=> {%>
+                        <tr>
+                          <td>
+                            <div style="width: 150px;" class="line-1 w-500">
+                              <%= user_feedback.name %>
+                            </div>
+                          </td>
+                          <td>
+                            <div style="width: 200px;" class="line-1 w-250px">
+                              <%= user_feedback.email %>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="w-250px line-2">
+                              <%= user_feedback.subject %>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="w-400px line-3">
+                              <%= user_feedback.message %>
+                            </div>
+                          </td>
+
+                          <td class="action-row">
+                            <div class="w-70">
+                              <button onclick="deleteFeedback('<%=user_feedback.id%>')" class="delete">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                              <button class="show modal-open-btn" data-modal="modal<%=user_feedback.id%>">
+                                <i class="fa-solid fa-eye"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        <div id="modal<%=user_feedback.id%>" class="modal">
+                          <div class="modal-content">
+                            <span class="modal-close">&times;</span>
+                            <div>
+                              <h4 class="feedback-subject fw-bold">
+                                <%= user_feedback.subject %>
+                              </h4>
+                              <div class="divider"></div>
+                              <div class="feedback-modal-person-info">
+                                <div>
+                                  <i class="fa-solid fa-user"></i>
+                                  <span class="line-1">
+                                    <%= user_feedback.name %>
+                                  </span>
+                                </div>
+                                <div>
+                                  <i class="fa-solid fa-calendar-days"></i>
+                                  <span>
+                                    <%= user_feedback.createdat %>
+                                  </span>
+                                </div>
+                                <div>
+                                  <i class="fa-solid fa-envelope"></i>
+                                  <span>
+                                    <%= user_feedback.email %>
+                                  </span>
+                                </div>
+                              </div>
+                              <p class="feedback-text">
+                                <%= user_feedback.message %>
+                              </p>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="action-row">
+                              <div>
+                                <button onclick="deleteFeedback('<%=user_feedback.id%>')" class="delete">
+                                  <i class="fa-solid fa-trash"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <% });%>
+                    </tbody>
+                  </table>
+                  <%} %>
             </div>
           </div>
+
         </main>
     </div>
-    <div id="modal1" class="modal">
-      <div class="modal-content">
-        <span class="modal-close">&times;</span>
-        <div>
-          <h4 class="feedback-subject fw-bold">Feedback Subject</h4>
-          <div class="divider"></div>
-          <div class="feedback-modal-person-info">
-            <div>
-              <i class="fa-solid fa-user"></i>
-              <span class="line-1">Mert Seyit Yılmaz lorem200</span>
-            </div>
-            <div>
-              <i class="fa-solid fa-calendar-days"></i>
-              <span>12 Ekim 2024 13:30:43</span>
-            </div>
-            <div>
-              <i class="fa-solid fa-envelope"></i>
-              <span>seyit@gmail.com</span>
-            </div>
-          </div>
-          <p class="feedback-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias ipsam excepturi
-            animi sed
-            distinctio
-            eligendi! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis tempore natus cum, vero
-            adipisci enim deleniti possimus modi id accusamus animi ea soluta ad iste, qui ipsam voluptates
-            reprehenderit
-            inventore? Consequuntur deleniti adipisci iusto! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Enim
-            sequi eum quam beatae eligendi laborum molestias suscipit at error ad! Perferendis quidem cupiditate
-            impedit.
-            Atque, quis cumque? Iusto in tempora accusamus accusantium minima ex excepturi exercitationem voluptatibus
-            eos
-            ipsam iure fuga libero ipsa praesentium necessitatibus, sunt soluta alias perferendis quasi labore saepe
-            iste
-            cumque. Placeat praesentium inventore delectus accusamus neque, quasi fugiat mollitia itaque officia ex
-            quaerat, sapiente cum doloremque? Minus aliquid quae vitae cum earum doloremque suscipit facilis non quidem!
-            Numquam accusantium maxime voluptates. Expedita qui aperiam a dolor perspiciatis placeat nobis minus nam
-            repudiandae similique sed inventore, quis ducimus deserunt ratione obcaecati quae magnam illum adipisci
-            exercitationem illo ipsum? Dolorem ipsa unde quidem beatae, in est sapiente reiciendis similique earum
-            cumque
-            nostrum. Tempore earum commodi, ad quod, enim, sunt aperiam sed assumenda deleniti consectetur et nemo est
-            cum
-            sit fugit voluptatibus rerum consequatur consequuntur cupiditate? Necessitatibus provident doloribus porro
-            omnis, ratione veritatis similique delectus ullam, est, sequi unde natus maxime iure ad modi. Perspiciatis
-            at
-            magnam ab nostrum facere autem corrupti. Incidunt accusantium corporis minima est magnam iure, error ex
-            blanditiis asperiores cumque, quas similique! Quibusdam doloribus ex sunt nam eius veniam dolore culpa,
-            error,
-            eaque necessitatibus sed.</p>
 
-        </div>
-        <div class="divider"></div>
-        <div class="action-row">
-          <div>
-            <button onclick="deleteAlert(() => {console.log('Deleted !')})" class="delete">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-            <a href="/admin/feedbacks/replay/1" class="replay">
-              <i class="fa-solid fa-share"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
     <script src="js/admin.main.js"></script>
+    <script src="js/admin.requests.js"></script>
     <script src="js/admin.sweetalert.js"></script>
     <script src="js/admin.customSweetAlert.js"></script>
     <script src="js/admin.modal.js"></script>

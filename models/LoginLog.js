@@ -1,11 +1,9 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/db');
-const bcrypt = require('bcrypt');
-const Admin = require('./Admin');
 const dateParserSimple = require('../helpers/dateParserSimple');
 
-const Testimonial = sequelize.define(
-  'Testimonial',
+const LoginLog = sequelize.define(
+  'LoginLog',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,73 +11,57 @@ const Testimonial = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    admin_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: Admin,
-        key: 'admin_id',
-      },
-    },
-    testimonial_name: {
+    admin_name: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Name require',
+          msg: 'Admin name require',
         },
       },
     },
-
-    testimonial_position: {
+    admin_email: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Position require',
+          msg: 'Admin name require',
+        },
+        isEmail: {
+          msg: 'Admin email must be valid',
         },
       },
     },
-
-    testimonial_rate: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Rate require',
-        },
-      },
-    },
-
-    testimonial_text: {
+    ip_address: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Text require',
+          msg: 'IP address require',
         },
       },
     },
 
-    testimonial_profile: {
-      type: DataTypes.STRING,
+    status: {
+      type: DataTypes.INTEGER, // 0: unauthorized, 1: incorrect password, 2:success (login situations)
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Profile require',
+          msg: 'Statu type require',
         },
+      },
+      get() {
+        const rawValue = this.getDataValue('status');
+        return rawValue === 0
+          ? 'UNAUTHORIZED'
+          : rawValue === 1
+          ? 'INCORRECT_PASSWORD'
+          : rawValue === 2
+          ? 'SUCCESS'
+          : 'UNDEFINED';
       },
     },
 
-    image_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Image name require',
-        },
-      },
-    },
     createdat: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
@@ -101,9 +83,9 @@ const Testimonial = sequelize.define(
     createdAt: false,
     updatedAt: false,
     freezeTableName: true,
-    modelName: 'Testimonial',
-    tableName: 'testimonials',
+    modelName: 'LoginLog',
+    tableName: 'login_logs',
   }
 );
 
-module.exports = Testimonial;
+module.exports = LoginLog;

@@ -84,8 +84,10 @@
                       </div>
 
                       <div class="col-12">
-                        <textarea class="form-control" name="message" rows="6" placeholder="Message"
-                          required></textarea>
+                        <textarea id="desinp" maxlength="1000" class="form-control" name="message" rows="6"
+                          placeholder="Message" required></textarea>
+                        <div class=" text-secondary fs-12 mt-2" id="count">Characters left:
+                          1000</div>
                       </div>
                       <div class="col-12 text-center">
                         <button id="form-submit-bt" type="submit">Send Message</button>

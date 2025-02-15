@@ -35,6 +35,7 @@ router.post('/send-feedback', async (req, res, next) => {
       email: email,
       subject: subject,
       message: message,
+      replied: false,
     });
     req.flash('success', 'Form Submited');
     res.redirect('/contact');

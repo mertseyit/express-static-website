@@ -6,6 +6,7 @@ const generateFilePath = require('../../helpers/generateFilePath');
 const createCustomErrorMsg = require('../../helpers/createCustomErrorMsg');
 const path = require('path');
 const findExistFileAndRemove = require('../../helpers/findExistFileAndRemove');
+const logActivityMiddlewre = require('../../middlewares/logActivityMiddleware');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -26,6 +27,9 @@ router.get('/update/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const portfolio = await Portfolio.findOne({ where: { id: id } });
+    if (!portfolio) {
+      return next('Portfolio Not Founded');
+    }
     res.status(status.OK).render('admin/edit_portfolio', {
       activePage: 'blogs',
       portfolio: portfolio.dataValues,
@@ -53,44 +57,28 @@ router.get('/add', async (req, res, next) => {
 
 router.post(
   '/add',
-  uploadStorage.single('preview_image'),
+  logActivityMiddlewre,
+  uploadStorage.single('preview_img'),
   async (req, res, next) => {
     try {
+      const { portfolio_title } = req.body;
       const { id } = req.user;
-      const {
-        testimonial_name,
-        testimonial_position,
-        testimonial_text,
-        testimonial_rate,
-      } = req.body;
-      if (
-        !testimonial_name ||
-        !testimonial_position ||
-        !testimonial_text ||
-        !testimonial_rate ||
-        !req.file
-      ) {
+      if (!portfolio_title || !req.file) {
         return res.status(status.BAD_REQUEST).json({
           message: 'Some parameters are missing',
           status: status.BAD_REQUEST,
         });
       }
 
-      await Testimonial.create({
+      await Portfolio.create({
         admin_id: id,
-        testimonial_name: testimonial_name,
-        testimonial_position: testimonial_position,
-        testimonial_rate: testimonial_rate,
-        testimonial_text: testimonial_text,
-        testimonial_profile: generateFilePath(
-          req.file.filename,
-          'img/testimonials'
-        ),
+        portfolio_title: portfolio_title,
+        preview_img: generateFilePath(req.file.filename, 'img/portfolios'),
         image_name: req.file.filename,
       });
 
       res.status(status.CREATED).json({
-        message: 'Testimonial created !',
+        message: 'Portfolio created !',
         status: status.CREATED,
       });
     } catch (error) {
@@ -102,57 +90,51 @@ router.post(
   }
 );
 
-router.post(
+router.patch(
   '/update/:id',
-  uploadStorage.single('preview_image'),
+  logActivityMiddlewre,
+  uploadStorage.single('preview_img'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const {
-        testimonial_name,
-        testimonial_position,
-        testimonial_text,
-        testimonial_rate,
-      } = req.body;
-
+      const { portfolio_title } = req.body;
       if (!req.file) {
         return res.status(status.BAD_REQUEST).json({
-          message: 'Testimonial profile require',
+          message: 'Portfolio image require',
           status: status.BAD_REQUEST,
         });
       }
 
-      const existTestimonial = await Testimonial.findOne({ where: { id: id } });
-      if (!existTestimonial) {
+      const existPortfolio = await Portfolio.findOne({
+        where: { id: id },
+      });
+
+      if (!existPortfolio) {
         return res.status(status.NOT_FOUND).json({
-          message: 'Testimonial not found',
+          message: 'Portfolio not found',
           status: status.NOT_FOUND,
         });
       }
+
       const image_path = path.join(
         `${__dirname}`,
         '..',
         '..',
         'public',
         'img',
-        'testimonials',
-        `${existTestimonial.dataValues.image_name}`
+        'portfolios',
+        `${existPortfolio.dataValues.image_name}`
       );
 
-      await Testimonial.update(
+      await Portfolio.update(
         {
-          testimonial_name: testimonial_name,
-          testimonial_position: testimonial_position,
-          testimonial_rate: testimonial_rate,
-          testimonial_text: testimonial_text,
-          testimonial_profile: generateFilePath(
-            req.file.filename,
-            'img/testimonials'
-          ),
+          portfolio_title: portfolio_title,
+          preview_img: generateFilePath(req.file.filename, 'img/portfolios'),
           image_name: req.file.filename,
         },
         { where: { id: id } }
       );
+
       const response = await findExistFileAndRemove(image_path);
       if (!response) {
         return res.status(status.INTERNAL_SERVER_ERROR).json({
@@ -160,9 +142,10 @@ router.post(
           status: status.INTERNAL_SERVER_ERROR,
         });
       }
-      res.status(status.OK).json({
-        message: 'Testimonial upadated !',
-        status: status.OK,
+
+      res.status(status.CREATED).json({
+        message: 'Portfolio updated !',
+        status: status.CREATED,
       });
     } catch (error) {
       res.status(status.BAD_REQUEST).json({
@@ -173,7 +156,7 @@ router.post(
   }
 );
 
-router.delete('/delete/:id', async (req, res, next) => {
+router.delete('/delete/:id', logActivityMiddlewre, async (req, res, next) => {
   try {
     const { id } = req.params;
     const existPortfolio = await Portfolio.findOne({ where: { id: id } });
@@ -202,10 +185,10 @@ router.delete('/delete/:id', async (req, res, next) => {
       });
     }
 
-    await Testimonial.destroy({ where: { id: id } });
+    await Portfolio.destroy({ where: { id: id } });
 
     res.status(status.OK).json({
-      message: 'Blog Deleted !',
+      message: 'Portfolio Deleted !',
       status: status.OK,
     });
   } catch (error) {

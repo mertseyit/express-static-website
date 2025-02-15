@@ -278,4 +278,19 @@
   //       document.querySelector('.error-message').style.display = 'block';
   //     }
   //   });
+  function maxLength(el) {
+    if (!('maxLength' in el)) {
+      var max = el.attributes.maxLength.value;
+      el.onkeypress = function () {
+        if (this.value.length >= max) return false;
+      };
+    }
+  }
+
+  maxLength(document.getElementById('desinp'));
+
+  document.getElementById('desinp').onkeyup = function () {
+    document.getElementById('count').innerHTML =
+      'Characters left: ' + (1000 - this.value.length);
+  };
 })();

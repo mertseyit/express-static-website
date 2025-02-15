@@ -6,6 +6,7 @@ const generateFilePath = require('../../helpers/generateFilePath');
 const createCustomErrorMsg = require('../../helpers/createCustomErrorMsg');
 const path = require('path');
 const findExistFileAndRemove = require('../../helpers/findExistFileAndRemove');
+const logActivityMiddlewre = require('../../middlewares/logActivityMiddleware');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -55,6 +56,7 @@ router.get(
 
 router.post(
   '/add',
+  logActivityMiddlewre,
   uploadStorage.single('preview_img'),
   async (req, res, next) => {
     try {
@@ -62,7 +64,7 @@ router.post(
       const { blog_title, blog_text } = req.body;
       if (!blog_title || !blog_text) {
         return res.status(status.BAD_REQUEST).json({
-          message: 'Some parameters missing',
+          message: 'Some parameters are missing',
           status: status.BAD_REQUEST,
         });
       }
@@ -92,8 +94,9 @@ router.post(
   }
 );
 
-router.post(
+router.patch(
   '/update/:id',
+  logActivityMiddlewre,
   uploadStorage.single('preview_img'),
   async (req, res, next) => {
     try {
@@ -149,6 +152,7 @@ router.post(
         status: status.OK,
       });
     } catch (error) {
+      console.log(error);
       res.status(status.BAD_REQUEST).json({
         message: `${createCustomErrorMsg(error)}`,
         status: status.BAD_REQUEST,
@@ -157,7 +161,7 @@ router.post(
   }
 );
 
-router.delete('/delete/:id', async (req, res, next) => {
+router.delete('/delete/:id', logActivityMiddlewre, async (req, res, next) => {
   try {
     const { id } = req.params;
     const existBlog = await Blog.findOne({ where: { id: id } });

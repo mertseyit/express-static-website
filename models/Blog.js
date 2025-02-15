@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../database/db');
 const bcrypt = require('bcrypt');
 const Admin = require('./Admin');
+const dateParserSimple = require('../helpers/dateParserSimple');
 
 const Blog = sequelize.define(
   'Blog',
@@ -62,10 +63,18 @@ const Blog = sequelize.define(
     createdat: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
+      get() {
+        const rawValue = this.getDataValue('createdat');
+        return rawValue ? dateParserSimple(rawValue) : null;
+      },
     },
     updatedat: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
+      get() {
+        const rawValue = this.getDataValue('updatedat');
+        return rawValue ? dateParserSimple(rawValue) : null;
+      },
     },
   },
   {

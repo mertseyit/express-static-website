@@ -1,4 +1,4 @@
-<div style="position: relative;">
+<div style="position: sticky; top: 0;">
   <button onclick="openCloseSidebarMenu()" id="sidebar-open-close-btn" class="open-close-menu">
     <i class="fa-solid fa-bars"></i>
   </button>
@@ -35,9 +35,9 @@
         </a>
       </li>
       <li>
-        <a href="/admin/settings" class="left-menu-link <%= activePage === 'settings' && 'active' %>">
+        <a href="/admin/logs" class="left-menu-link <%= activePage === 'logs' && 'active' %>">
           <i class="fa-solid fa-gear"></i>
-          Settings
+          Logs
         </a>
       </li>
     </ul>

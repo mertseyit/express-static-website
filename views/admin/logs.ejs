@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="css/admin.main.css">
+  <link rel="stylesheet" href="css/admin.fontawesome.all.min.css">
+</head>
+
+<body>
+  <%- include('partials/navbar') %>
+
+    <div class="flex-content">
+      <%- include('partials/sidebar') %>
+        <main class="container main-calculated">
+          <div class="pagination">
+            <a href="home" class="text-primary">
+              <i class="fa-solid fa-house fs-16"></i>
+            </a>
+            <span class="fs-18">/</span>
+            <span class="current-page fs-14">Logs</span>
+
+          </div>
+
+          <div class="content-box fs-14 shadow">
+            <div class="content-header">
+              <h4 class="content-title fs-16">Admin Activity</h4>
+              <div class="content-events">
+                <button onclick="notAllowAlert()" href="#" class="export">
+                  <i class="fa-solid fa-file-arrow-down"></i>
+                  Export
+                </button>
+              </div>
+            </div>
+            <div style="overflow-x: auto;overflow-y: auto;max-height: 400px;">
+              <% if(activityLogs.length===0){ %>
+                <div style="margin-top: 15px;" class="fs-12">No data found</div>
+                <%} else{ %>
+                  <table class="content-table">
+                    <thead style="position: sticky; top: 0;">
+                      <tr>
+                        <th class="text-nowrap">Admin Name</th>
+                        <th class="text-nowrap">IP Address</th>
+                        <th class="text-nowrap">Event</th>
+                        <th class="text-nowrap">URL</th>
+                        <th class="text-nowrap">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% activityLogs.forEach((activityLog,index)=> {%>
+                        <tr>
+                          <td class="w-70">
+                            <div class="line-1 ">
+                              <%=activityLog.admin_name%>
+                            </div>
+                          </td>
+                          <td class="w-200">
+                            <div class="line-1 ">
+                              <%=activityLog.ip_address%>
+                            </div>
+                          </td>
+                          <td class="w-25px">
+                            <div class="line-1 ">
+                              <span class="badge fs-12 badge-<%=activityLog.event%>">
+                                <%=activityLog.event%>
+                              </span>
+                            </div>
+                          </td>
+                          <td class="w-50">
+                            <div class="line-1 text-nowrap">
+                              <%=activityLog.page%>
+                            </div>
+                          </td>
+                          <td class="w-50">
+                            <div class="text-nowrap">
+                              <%=activityLog.createdat%>
+                            </div>
+                          </td>
+                        </tr>
+                        <% });%>
+
+                    </tbody>
+                  </table>
+
+                  <% } %>
+
+            </div>
+          </div>
+          <div class="content-box fs-14 shadow">
+            <div class="content-header">
+              <h4 class="content-title fs-16">Admin Login Activity</h4>
+              <div class="content-events">
+                <button onclick="notAllowAlert()" href="#" class="export">
+                  <i class="fa-solid fa-file-arrow-down"></i>
+                  Export
+                </button>
+              </div>
+            </div>
+            <div style="overflow-x: auto;overflow-y: auto;max-height: 400px;">
+              <% if(loginLogs.length===0){ %>
+                <div style="margin-top: 15px;" class="fs-12">No data found</div>
+                <%} else{ %>
+                  <table class="content-table">
+                    <thead style="position: sticky; top: 0;">
+                      <tr>
+                        <th class="text-nowrap">Admin Name</th>
+                        <th class="text-nowrap">Admin Email</th>
+                        <th class="text-nowrap">IP Address</th>
+                        <th class="text-nowrap">Status</th>
+                        <th class="text-nowrap">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% loginLogs.forEach((loginLog,index)=> {%>
+                        <tr>
+                          <td class="w-70">
+                            <div class="line-1 ">
+                              <%=loginLog.admin_name%>
+                            </div>
+                          </td>
+                          <td class="w-200">
+                            <div class="line-1 ">
+                              <%=loginLog.admin_email%>
+                            </div>
+                          </td>
+                          <td class="w-200">
+                            <div class="line-1 ">
+                              <%=loginLog.ip_address%>
+                            </div>
+                          </td>
+                          <td class="w-25px">
+                            <div class="line-1 ">
+                              <span class="badge fs-12 badge-<%=loginLog.status%>">
+                                <%=loginLog.status%>
+                              </span>
+                            </div>
+                          </td>
+                          <td class="w-50">
+                            <div class="text-nowrap">
+                              <%=loginLog.createdat%>
+                            </div>
+                          </td>
+                        </tr>
+                        <% });%>
+
+                    </tbody>
+                  </table>
+
+                  <% } %>
+
+            </div>
+          </div>
+
+        </main>
+    </div>
+    <script src="js/admin.sweetalert.js"></script>
+    <script src="js/admin.customSweetAlert.js"></script>
+    <script src="js/admin.requests.js"></script>
+    <script src="js/admin.main.js"></script>
+</body>
+
+</html>

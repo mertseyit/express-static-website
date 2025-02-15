@@ -5,18 +5,18 @@
   <span class="text-white fw-bold"> PANEL</span>
   <ul class="nav-links">
     <li>
-      <a href="/notifications" class="text-white fs-18">
-        <i class="fa-solid fa-bell"></i>
+      <a target="_blank" href="/" class="text-white fs-18">
+        <i class="fa-solid fa-globe"></i>
       </a>
     </li>
     <li>
-      <button href="/login" class="logout-btn text-white fs-18">
+      <button href="/admin/signin" class="logout-btn text-white fs-18">
         <i class="fa-solid fa-right-from-bracket"></i>
       </button>
     </li>
     <li>
-      <a href="/profile">
-        <span class="profile-icon text-white">A</span>
+      <a href="/admin/profile">
+        <span class="profile-icon text-white <%= activePage === 'profile' && 'active' %>">A</span>
       </a>
     </li>
   </ul>

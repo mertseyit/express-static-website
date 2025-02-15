@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="css/admin.main.css">
+  <link rel="stylesheet" href="css/admin.fontawesome.all.min.css">
+</head>
+
+<body>
+  <%- include('partials/navbar') %>
+
+    <div class="flex-content">
+      <%- include('partials/sidebar') %>
+
+        <main class="container main-calculated">
+          <div class="pagination">
+            <a href="/admin/home" class="text-primary">
+              <i class="fa-solid fa-house fs-16"></i>
+            </a>
+            <span class="fs-18">/</span>
+            <span class="current-page fs-14">Profile</span>
+
+          </div>
+          <div class="flex-box">
+            <h3 class="fs-24 profile-name">Hello <span class="fw-bold">
+                <%= profile.firstname %>
+                  <%= profile.lastname %> !
+              </span>
+            </h3>
+            <button data-modal="updateModal" class="update-profile show modal-open-btn fs-16">
+              <i class="fa-solid fa-pen"></i>
+              Update Profile
+            </button>
+
+          </div>
+          <div class="content-box fs-14 shadow">
+            <div class="profile-box">
+              <span class="fs-14">Email</span>
+              <div class="flex-box-start">
+                <div>
+                  <%= profile.email %>
+                </div>
+                <% if(!profile.email_verified){ %>
+                  <span class="badge error fs-12">Email Not Verified. To verify, click <button
+                      onclick="verifyEmailAgain('<%= profile.email %>')"
+                      class="email-verify-btn fw-bold">here</button></span>
+                  <% } %>
+              </div>
+            </div>
+            <div class="profile-box">
+              <span class="fs-14">Profile Created</span>
+              <span>
+                <%= profile.createdat %>
+              </span>
+            </div>
+            <div class="profile-box">
+              <span class="fs-14">Last Updated</span>
+              <span>
+                <%= profile.updatedat %>
+              </span>
+            </div>
+            <div class="flex-box-start">
+              <button data-modal="updateEmail" class="update-email show modal-open-btn fs-16">
+                <i class="fa-solid fa-envelope"></i>
+                Update Email
+              </button>
+              <button onclick="questionAndActionAlert(() => {resetPasswordGetLink()})" data-modal="updatePassword"
+                class="update-password show modal-open-btn fs-16">
+                <i class="fa-solid fa-key"></i>
+                Update Password
+              </button>
+            </div>
+          </div>
+        </main>
+        <div id="updateModal" class="modal">
+          <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div>
+              <h4 class="feedback-subject fw-bold">
+                Update Profile
+              </h4>
+              <div class="divider"></div>
+              <div>
+                <div class="form-input">
+                  <label for="firstname" class="text-primary fs-14">Firstname</label>
+                  <input value="<%=profile.firstname %>" type="text" name="firstname" id="firstname" required>
+                </div>
+                <div class="form-input">
+                  <label for="lastname" class="text-primary fs-14">Lastname</label>
+                  <input value="<%=profile.lastname %>" type="text" name="lastname" id="lastname" required>
+                </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div>
+              <button onclick="questionAndActionAlert(() => {updateProfile('<%-profile.id%>')})" type="button"
+                class="update-profile fs-14 text-nowrap">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="updateEmail" class="modal">
+          <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div>
+              <h4 class="feedback-subject fw-bold">
+                Update Email
+              </h4>
+              <div class="divider"></div>
+              <div>
+                <div class="form-input">
+                  <label for="new-email" class="text-primary fs-14">New Valid Email</label>
+                  <input type="email" name="new-email" id="new-email" required>
+                </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div>
+              <button onclick="questionAndActionAlert(() => {updateEmail()})" type="button"
+                class="update-profile fs-14 text-nowrap">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <script src="js/admin.main.js"></script>
+    <script src="js/admin.requests.js"></script>
+    <script src="js/admin.sweetalert.js"></script>
+    <script src="js/admin.customSweetAlert.js"></script>
+    <script src="js/admin.modal.js"></script>
+</body>
+
+</html>

@@ -1,6 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/db');
 const bcrypt = require('bcrypt');
+const Admin = require('./Admin');
+const dateParserSimple = require('../helpers/dateParserSimple');
 
 const UserFeedback = sequelize.define(
   'UserFeedback',
@@ -25,7 +27,7 @@ const UserFeedback = sequelize.define(
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Name require',
+          msg: 'Email require',
         },
         isEmail: {
           msg: 'Email must be valid',
@@ -50,13 +52,37 @@ const UserFeedback = sequelize.define(
         },
       },
     },
+    who_replied: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: Admin,
+        key: 'admin_id',
+      },
+    },
+    createdat: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      get() {
+        const rawValue = this.getDataValue('createdat');
+        return rawValue ? dateParserSimple(rawValue) : null;
+      },
+    },
+    updatedat: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      get() {
+        const rawValue = this.getDataValue('updatedat');
+        return rawValue ? dateParserSimple(rawValue) : null;
+      },
+    },
   },
   {
     createdAt: false,
     updatedAt: false,
     freezeTableName: true,
     modelName: 'UserFeedback',
-    tableName: 'user_feedback',
+    tableName: 'user_feedbacks',
   }
 );
 
